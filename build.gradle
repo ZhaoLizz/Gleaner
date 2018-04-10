@@ -7,6 +7,9 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.0.1'
         // just for GCM.
         classpath 'com.google.gms:google-services:2.0.0-alpha3'
+        //butterknife
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+
     }
 }
 
@@ -20,7 +23,5 @@ allprojects {
         }
         maven { url 'http://developer.huawei.com/repo/' }
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
-
-
     }
 }

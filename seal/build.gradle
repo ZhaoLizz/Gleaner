@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//butterknife
+//apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 23
@@ -69,12 +71,13 @@ dependencies {
     compile project(':CallKit')
     compile project(':RedPacket')
     compile 'com.huawei.android.hms:push:2.5.3.305'
-
     //logger
     implementation 'com.orhanobut:logger:2.2.0'
     //bmob
     implementation 'cn.bmob.android:bmob-sdk:3.4.6'
-
-
+    //butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation files('libs/sun.misc.BASE64Decoder.jar')
 }
 apply plugin: 'com.google.gms.google-services'

@@ -134,10 +134,13 @@
     <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\RedPacket\libs\alipaySingle-20170510.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.google.code.findbugs:jsr305:2.0.1@jar" level="project" />
     <orderEntry type="library" name="com.facebook.stetho:stetho-1.4.1" level="project" />
+    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\seal\libs\sun.misc.BASE64Decoder.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\recognizer\libs\Msc_1.1127.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-26.0.0" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\seal\libs\happy-dns-0.2.3.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\seal\libs\okhttp-2.7.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.jakewharton:butterknife-8.8.1" level="project" />
+    <orderEntry type="library" name="com.jakewharton:butterknife-annotations:8.8.1@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\CallLib\libs\agora-rtc-sdk.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-master\seal\libs\AMap_Channel_Location_V1.4.0_20160708.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="commons-cli:commons-cli:1.2@jar" level="project" />
