@@ -10,7 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/contactcard/contactcard.iml" filepath="$PROJECT_DIR$/contactcard/contactcard.iml" />
       <module fileurl="file://$PROJECT_DIR$/recognizer/recognizer.iml" filepath="$PROJECT_DIR$/recognizer/recognizer.iml" />
       <module fileurl="file://$PROJECT_DIR$/seal/seal.iml" filepath="$PROJECT_DIR$/seal/seal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sealtalk-android-master.iml" filepath="$PROJECT_DIR$/sealtalk-android-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sealtalk-android-bug.iml" filepath="$PROJECT_DIR$/sealtalk-android-bug.iml" />
       <module fileurl="file://$PROJECT_DIR$/sticker/sticker.iml" filepath="$PROJECT_DIR$/sticker/sticker.iml" />
     </modules>
   </component>

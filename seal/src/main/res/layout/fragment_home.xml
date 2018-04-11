@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/btn_home_camera_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_home_search"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_toLeftOf="@+id/btn_home_search"
+        android:layout_toStartOf="@+id/btn_home_search"
+        android:drawableTop="@drawable/home_camera"
+        android:gravity="center"
+        android:text="发布失物招领"/>
+
+
+    <TextView
+        android:id="@+id/btn_home_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_home_recruit_notice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp"
+        android:drawableTop="@drawable/home_serach"
+        android:gravity="center"
+        android:text="发布寻物启示"/>
+
+    <TextView
+        android:id="@+id/btn_home_recruit_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="130dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_toEndOf="@+id/btn_home_search"
+        android:layout_toRightOf="@+id/btn_home_search"
+        android:drawableTop="@drawable/home_recruit"
+        android:gravity="center"
+        android:text="查询失物列表"/>
+
+</RelativeLayout>

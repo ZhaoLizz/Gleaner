@@ -20,10 +20,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.server.HomeWatcherReceiver;
 import cn.rongcloud.im.server.broadcast.BroadcastManager;
@@ -70,6 +73,7 @@ public class MainActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         mContext = this;
         isDebug = getSharedPreferences("config", MODE_PRIVATE).getBoolean("isDebug", false);
         initViews();
@@ -78,7 +82,6 @@ public class MainActivity extends FragmentActivity implements
         initMainViewPager();
         registerHomeKeyReceiver(this);
     }
-
 
     private void initViews() {
         RelativeLayout chatRLayout = (RelativeLayout) findViewById(R.id.seal_chat);
@@ -264,12 +267,15 @@ public class MainActivity extends FragmentActivity implements
                 mViewPager.setCurrentItem(0, false);
                 break;
             case R.id.seal_contact_list:
+                //通讯录
                 mViewPager.setCurrentItem(1, false);
                 break;
             case R.id.seal_find:
+                //发现
                 mViewPager.setCurrentItem(2, false);
                 break;
             case R.id.seal_me:
+                //我
                 mViewPager.setCurrentItem(3, false);
                 mMineRed.setVisibility(View.GONE);
                 break;
@@ -446,6 +452,7 @@ public class MainActivity extends FragmentActivity implements
     }
 
     private HomeWatcherReceiver mHomeKeyReceiver = null;
+
     //如果遇见 Android 7.0 系统切换到后台回来无效的情况 把下面注册广播相关代码注释或者删除即可解决。下面广播重写 home 键是为了解决三星 note3 按 home 键花屏的一个问题
     private void registerHomeKeyReceiver(Context context) {
         if (mHomeKeyReceiver == null) {
@@ -456,6 +463,24 @@ public class MainActivity extends FragmentActivity implements
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * 悬浮按钮点击事件
+     * @param view
+     */
+    @OnClick({R.id.btn_glean, R.id.btn_find})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            //失物招领
+            case R.id.btn_glean:
+                Toast.makeText(mContext, "失物招领", Toast.LENGTH_SHORT).show();
+                break;
+            //寻物启示
+            case R.id.btn_find:
+                Toast.makeText(mContext, "寻物其实", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 }
