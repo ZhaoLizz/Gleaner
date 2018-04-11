@@ -1,12 +1,18 @@
 package cn.rongcloud.im.ui.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,6 +28,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +39,8 @@ import cn.rongcloud.im.R;
 import cn.rongcloud.im.server.HomeWatcherReceiver;
 import cn.rongcloud.im.server.broadcast.BroadcastManager;
 import cn.rongcloud.im.server.utils.NToast;
+import cn.rongcloud.im.server.utils.photo.PhotoUtils;
+import cn.rongcloud.im.server.widget.BottomMenuDialog;
 import cn.rongcloud.im.server.widget.LoadDialog;
 import cn.rongcloud.im.ui.adapter.ConversationListAdapterEx;
 import cn.rongcloud.im.ui.fragment.ContactsFragment;
@@ -61,6 +71,10 @@ public class MainActivity extends FragmentActivity implements
     private TextView mTextChats, mTextContact, mTextFind, mTextMe;
     private DragPointView mUnreadNumView;
     private ImageView mSearchImageView;
+    private BottomMenuDialog dialog;
+    private PhotoUtils mPhotoUtils;
+    private Uri selectUri;
+
     /**
      * 会话列表的fragment
      */
@@ -80,6 +94,7 @@ public class MainActivity extends FragmentActivity implements
         changeTextViewColor();
         changeSelectedTabState(0);
         initMainViewPager();
+        initPhotoUtils();
         registerHomeKeyReceiver(this);
     }
 
@@ -468,6 +483,7 @@ public class MainActivity extends FragmentActivity implements
 
     /**
      * 悬浮按钮点击事件
+     *
      * @param view
      */
     @OnClick({R.id.btn_glean, R.id.btn_find})
@@ -476,10 +492,93 @@ public class MainActivity extends FragmentActivity implements
             //失物招领
             case R.id.btn_glean:
                 Toast.makeText(mContext, "失物招领", Toast.LENGTH_SHORT).show();
+                showPhotoDialog();
                 break;
             //寻物启示
             case R.id.btn_find:
                 Toast.makeText(mContext, "寻物其实", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    private void initPhotoUtils() {
+        mPhotoUtils = new PhotoUtils(new PhotoUtils.OnPhotoResultListener() {
+            @Override
+            public void onPhotoResult(Uri uri) {
+                if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
+                    Logger.d(uri);
+                    selectUri = uri;
+                    LoadDialog.show(mContext);
+                }
+            }
+
+            @Override
+            public void onPhotoCancel() {
+                Logger.d("here");
+            }
+        });
+    }
+
+    static public final int REQUEST_CODE_ASK_PERMISSIONS = 101;
+
+    /**
+     * 弹出底部框
+     */
+    @TargetApi(23)
+    private void showPhotoDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+
+        dialog = new BottomMenuDialog(mContext);
+        dialog.setConfirmListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if (dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int checkPermission = checkSelfPermission(Manifest.permission.CAMERA);
+                    if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+                        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSIONS);
+                        } else {
+                            new AlertDialog.Builder(mContext)
+                                    .setMessage("您需要在设置里打开相机权限。")
+                                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSIONS);
+                                        }
+                                    })
+                                    .setNegativeButton("取消", null)
+                                    .create().show();
+                        }
+                        return;
+                    }
+                }
+                mPhotoUtils.takePicture(MainActivity.this);
+            }
+        });
+        dialog.setMiddleListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if (dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                mPhotoUtils.selectPicture(MainActivity.this);
+            }
+        });
+        dialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case PhotoUtils.INTENT_CROP:
+            case PhotoUtils.INTENT_TAKE:
+            case PhotoUtils.INTENT_SELECT:
+                mPhotoUtils.onActivityResult(MainActivity.this, requestCode, resultCode, data);
                 break;
         }
     }
