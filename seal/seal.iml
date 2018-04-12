@@ -126,6 +126,8 @@
     <orderEntry type="library" name="Gradle: com.huawei.android.hms:base-2.5.3.305" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/MiPush_SDK_Client_3_5_1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/sticker/libs/BQMMRongCloudPlugin-v2.0.1.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/aip-java-sdk-4.2.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/json-20160810.jar:unspecified@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support:multidex-1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:multidex-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-26.0.0" level="project" />
@@ -145,6 +147,7 @@
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/AMap_2DMap_V2.9.0_20160525.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton:butterknife-8.8.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/RedPacket/libs/alipaySingle-20170510.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/log4j-1.2.17.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.2.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton:butterknife-annotations:8.8.1@jar" level="project" />

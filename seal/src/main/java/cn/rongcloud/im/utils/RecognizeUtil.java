@@ -4,12 +4,17 @@ import android.graphics.Bitmap;
 import android.util.Base64;
 import android.util.Log;
 
+import com.baidu.aip.ocr.AipOcr;
 import com.google.gson.Gson;
+import com.huawei.hms.support.api.entity.auth.AppInfo;
 import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -36,10 +41,12 @@ import javax.crypto.spec.SecretKeySpec;
 import Decoder.BASE64Encoder;
 import cn.rongcloud.im.Config;
 import cn.rongcloud.im.bean.ImageBody;
+import cn.rongcloud.im.bean.OCRBaiduText;
 import cn.rongcloud.im.bean.OCRCharDataJson;
 import cn.rongcloud.im.bean.OCRIdCardFaceDataJson;
 import cn.rongcloud.im.bean.OCRIdCardResultJson;
 import cn.rongcloud.im.bean.Tags;
+import cn.rongcloud.im.bean.Text;
 import cn.rongcloud.im.constant.Constants;
 
 
@@ -231,7 +238,6 @@ public class RecognizeUtil {
                     }
                 }
                 listener.onRecognize(result);
-                Logger.d(result);
             }
         }).start();
 
@@ -261,10 +267,31 @@ public class RecognizeUtil {
                 }
                 result.append(new String(response.body().bytes(), Constants.CLOUDAPI_ENCODING));
             }
-
         });
+        Logger.d(result.toString());
         return result.toString();
     }
+
+    public static void readTextImgByBaidu(File file) {
+        final String APP_ID = "11086346";
+        final String API_KEY = "VrWfpupF41Dt3LEdtjF8uyaB";
+        final String SECRET_KEY = "aMYGjI4RBvRq2qF5QCzwxqFZKvHPjEK4";
+
+        AipOcr client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
+        String image = file.getPath();
+
+        // 传入可选参数调用接口
+        HashMap<String, String> options = new HashMap<>();
+        options.put("language_type", "CHN_ENG");
+        options.put("probability", "true");
+        JSONObject res = client.basicGeneral(image, options);
+        try {
+            Logger.d(res.toString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static String readIdCardImg(String base64Img) {
         String body = "{\"inputs\":[{\"image\":{\"dataType\":50,\"dataValue\":\"" + base64Img + "\"},\"configure\":{\"dataType\":50,\"dataValue\":\"{\\\"side\\\":\\\"" + "face" + "\\\"}\"}}]}";
@@ -382,6 +409,9 @@ public class RecognizeUtil {
         void onRecognize(String jsonResult);
     }
 
+    public interface OnReadTextListener {
+        void onReadText(List<Text> texts);
+    }
 
 
 

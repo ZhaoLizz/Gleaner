@@ -524,36 +524,47 @@ public class MainActivity extends FragmentActivity implements
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
                     Logger.d(uri.getPath());
                     selectUri = uri;
-                    File file = new File(uri.getPath());
+                    final File file = new File(uri.getPath());
                     Logger.d("原始file大小：" + file.length() + "\n" + Arrays.toString(computeSize(uri.getPath())) + "\n" + file.getPath());
                     File compressedFile = null;
+
+                    //compress
+//                    try {
+//                        compressedFile = new Compressor(MainActivity.this)
+//                                .setQuality(20)
+//                                .compressToFile(file);
+//                        Logger.d("压缩后大小： \n " + Arrays.toString(computeSize(compressedFile.getPath())) + "\n" + compressedFile.getPath() + "\n" + compressedFile.length());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    final File finalCompressedFile = compressedFile;
+
                     try {
-                        compressedFile = new Compressor(MainActivity.this)
-                                .setQuality(20)
-                                .compressToFile(file);
-                        Logger.d("压缩后大小： \n " + Arrays.toString(computeSize(compressedFile.getPath())) + "\n" + compressedFile.getPath() + "\n" + compressedFile.length());
-                    } catch (IOException e) {
+//                        final String base64Str = RecognizeUtil.file2Str(finalCompressedFile);
+                        final String base64Str = RecognizeUtil.file2Str(file);
+                        String jsonBody = new Gson().toJson(new BitmapBodyJson(base64Str));
+
+                        RecognizeUtil.sendPost(jsonBody, new RecognizeUtil.OnRecognizeListener() {
+                            @Override
+                            public void onRecognize(String jsonResult) {
+                                String itemName = RecognizeUtil.parseItemJson(jsonResult);
+                                Logger.d(itemName);
+                                RecognizeUtil.readTextImgByBaidu(file);
+
+
+                                if (itemName.equals("校园卡")) {
+//                                    String charJsonBody = " {\"image\":\" " + base64Str + "\", \"configure\":\"{\\\"min_size\\\" : 16,\\\"output_prob\\\" : true }\"}";
+//                                    String cardResult = RecognizeUtil.readTextImg(charJsonBody);
+//                                    Logger.d(cardResult);
+                                }
+
+
+                            }
+                        });
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-                    final File finalCompressedFile = compressedFile;
-
-
-                    /*new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-//                                String jsonBody = new Gson().toJson(new BitmapBodyJson(RecognizeUtil.file2Str(finalCompressedFile)));
-//                                String jsonResult = RecognizeUtil.sendPost(jsonBody);
-//                                Logger.d(jsonResult);
-//                                String itemName = RecognizeUtil.parseItemJson(jsonResult);
-//                                Logger.d(itemName);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).run();*/
-
                 }
             }
 
@@ -562,6 +573,7 @@ public class MainActivity extends FragmentActivity implements
                 Logger.d("here");
             }
         });
+
     }
 
 

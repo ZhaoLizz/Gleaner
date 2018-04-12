@@ -85,7 +85,6 @@ dependencies {
     implementation 'top.zibin:Luban:1.1.3'
     //compresser
     implementation 'id.zelory:compressor:2.1.0'
-
-
+    implementation files('libs/log4j-1.2.17.jar')
 }
 apply plugin: 'com.google.gms.google-services'
