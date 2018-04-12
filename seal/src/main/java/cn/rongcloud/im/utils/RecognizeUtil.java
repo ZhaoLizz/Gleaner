@@ -6,9 +6,7 @@ import android.util.Log;
 
 import com.baidu.aip.ocr.AipOcr;
 import com.google.gson.Gson;
-import com.huawei.hms.support.api.entity.auth.AppInfo;
 import com.orhanobut.logger.Logger;
-import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -41,12 +39,8 @@ import javax.crypto.spec.SecretKeySpec;
 import Decoder.BASE64Encoder;
 import cn.rongcloud.im.Config;
 import cn.rongcloud.im.bean.ImageBody;
-import cn.rongcloud.im.bean.OCRBaiduText;
 import cn.rongcloud.im.bean.OCRCharDataJson;
-import cn.rongcloud.im.bean.OCRIdCardFaceDataJson;
-import cn.rongcloud.im.bean.OCRIdCardResultJson;
 import cn.rongcloud.im.bean.Tags;
-import cn.rongcloud.im.bean.Text;
 import cn.rongcloud.im.constant.Constants;
 
 
@@ -286,10 +280,13 @@ public class RecognizeUtil {
         options.put("probability", "true");
         JSONObject res = client.basicGeneral(image, options);
         try {
-            Logger.d(res.toString(2));
+            String jsonResult = res.toString(2);
+            Logger.d(jsonResult);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -410,7 +407,7 @@ public class RecognizeUtil {
     }
 
     public interface OnReadTextListener {
-        void onReadText(List<Text> texts);
+        void onReadText(List<String> textMessages);
     }
 
 
