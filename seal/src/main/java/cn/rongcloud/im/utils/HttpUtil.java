@@ -126,7 +126,9 @@ public class HttpUtil {
                     return true;
                 }
             };
-            client = new OkHttpClient.Builder().sslSocketFactory(sslContext.getSocketFactory(), xtm).hostnameVerifier(DO_NOT_VERIFY).build();
+//            client = new OkHttpClient.Builder().sslSocketFactory(sslContext.getSocketFactory(), xtm).hostnameVerifier(DO_NOT_VERIFY).build();
+            client = new OkHttpClient();
+            client.setSslSocketFactory(sslContext.getSocketFactory()).setHostnameVerifier(DO_NOT_VERIFY);
         } else {
             client = new OkHttpClient();
         }

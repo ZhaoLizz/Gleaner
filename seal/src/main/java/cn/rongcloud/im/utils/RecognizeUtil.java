@@ -1,17 +1,21 @@
 package cn.rongcloud.im.utils;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -30,18 +34,14 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import Decoder.BASE64Encoder;
-import cn.bmob.imdemo.Config;
-import cn.bmob.imdemo.bean.BitmapBodyJson;
-import cn.bmob.imdemo.bean.IdCardData;
-import cn.bmob.imdemo.bean.ImageBody;
-import cn.bmob.imdemo.bean.OCRCharDataJson;
-import cn.bmob.imdemo.bean.OCRIdCardFaceDataJson;
-import cn.bmob.imdemo.bean.OCRIdCardResultJson;
-import cn.bmob.imdemo.bean.Tags;
-import cn.bmob.imdemo.constant.Constants;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import cn.rongcloud.im.Config;
+import cn.rongcloud.im.bean.ImageBody;
+import cn.rongcloud.im.bean.OCRCharDataJson;
+import cn.rongcloud.im.bean.OCRIdCardFaceDataJson;
+import cn.rongcloud.im.bean.OCRIdCardResultJson;
+import cn.rongcloud.im.bean.Tags;
+import cn.rongcloud.im.constant.Constants;
+
 
 /**
  * Created by a6100890 on 2018/2/25.
@@ -109,6 +109,28 @@ public class RecognizeUtil {
         return content;
     }
 
+    public static String file2Str(File file) {
+        ByteArrayOutputStream out = null;
+        try {
+            FileInputStream in = new FileInputStream(file);
+            out = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+            int i = 0;
+            while ((i = in.read(b)) != -1) {
+                out.write(b, 0, b.length);
+            }
+            out.close();
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        byte[] s = out.toByteArray();
+        String base64 = Base64.encodeToString(s, Base64.DEFAULT);
+        return base64;
+    }
+
     /**
      * 压缩bitmap
      */
@@ -122,87 +144,99 @@ public class RecognizeUtil {
 
     /***
      *
-     * @param body 发送的json
+     * @param body 发送的json,
      * @return json
      * @throws Exception
      */
-    public static String sendPost(String body) throws Exception {
-        PrintWriter out = null;
-        BufferedReader in = null;
-        String result = "";
-        int statusCode = 200;
-        try {
-            final String url = "https://dtplus-cn-shanghai.data.aliyuncs.com/image/tag";
-            URL realUrl = new URL(url);
+    public static void sendPost(final String body, final OnRecognizeListener listener) throws Exception {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                PrintWriter out = null;
+                BufferedReader in = null;
+                String result = "";
+                int statusCode = 200;
+                try {
+                    final String url = "https://dtplus-cn-shanghai.data.aliyuncs.com/image/tag";
+                    URL realUrl = new URL(url);
 
-            /*
-             * http header 参数
-             */
-            String ak_id = "LTAI4CrS1MlxoaAL";
-            String ak_secret = "uZ7xb6YE3kn9QKzBmXPUURklgKv0Ax";
-            String method = "POST";
-            String accept = "application/json";
-            String content_type = "application/json";
-            String path = realUrl.getFile();
-            String date = toGMTString(new Date());
+                    /*
+                     * http header 参数
+                     */
+                    String ak_id = "LTAI4CrS1MlxoaAL";
+                    String ak_secret = "uZ7xb6YE3kn9QKzBmXPUURklgKv0Ax";
+                    String method = "POST";
+                    String accept = "application/json";
+                    String content_type = "application/json";
+                    String path = realUrl.getFile();
+                    String date = toGMTString(new Date());
 
-            // 1.对body做MD5+BASE64加密
-            String bodyMd5 = MD5Base64(body);
-            String stringToSign = method + "\n" + accept + "\n" + bodyMd5 + "\n" + content_type + "\n" + date + "\n"
-                    + path;
-            // 2.计算 HMAC-SHA1
-            String signature = HMACSha1(stringToSign, ak_secret);
-            // 3.得到 authorization header
-            String authHeader = "Dataplus " + ak_id + ":" + signature;
-            // 打开和URL之间的连接
-            URLConnection conn = realUrl.openConnection();
-            // 设置通用的请求属性
-            conn.setRequestProperty("accept", accept);
-            conn.setRequestProperty("content-type", content_type);
-            conn.setRequestProperty("date", date);
-            conn.setRequestProperty("Authorization", authHeader);
+                    // 1.对body做MD5+BASE64加密
+                    String bodyMd5 = MD5Base64(body);
+                    String stringToSign = method + "\n" + accept + "\n" + bodyMd5 + "\n" + content_type + "\n" + date + "\n"
+                            + path;
+                    // 2.计算 HMAC-SHA1
+                    String signature = HMACSha1(stringToSign, ak_secret);
+                    // 3.得到 authorization header
+                    String authHeader = "Dataplus " + ak_id + ":" + signature;
+                    // 打开和URL之间的连接
+                    URLConnection conn = realUrl.openConnection();
+                    // 设置通用的请求属性
+                    conn.setRequestProperty("accept", accept);
+                    conn.setRequestProperty("content-type", content_type);
+                    conn.setRequestProperty("date", date);
+                    conn.setRequestProperty("Authorization", authHeader);
 
-            // 发送POST请求必须设置如下两行
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            // 获取URLConnection对象对应的输出流
-            out = new PrintWriter(conn.getOutputStream());
-            // 发送请求参数
-            out.print(body);
-            // flush输出流的缓冲
-            out.flush();
+                    // 发送POST请求必须设置如下两行
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    // 获取URLConnection对象对应的输出流
+                    out = new PrintWriter(conn.getOutputStream());
+                    // 发送请求参数
+                    out.print(body);
+                    // flush输出流的缓冲
+                    out.flush();
 
-            // 定义BufferedReader输入流来读取URL的响应
-            statusCode = ((HttpURLConnection) conn).getResponseCode();
-            if (statusCode != 200) {
-                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) conn).getErrorStream()));
-            } else {
-                in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            }
-            String line;
-            while ((line = in.readLine()) != null) {
-                result += line;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
+                    // 定义BufferedReader输入流来读取URL的响应
+                    statusCode = ((HttpURLConnection) conn).getResponseCode();
+                    if (statusCode != 200) {
+                        in = new BufferedReader(new InputStreamReader(((HttpURLConnection) conn).getErrorStream()));
+                    } else {
+                        in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    }
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        result += line;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (out != null) {
+                            out.close();
+                        }
+                        if (in != null) {
+                            in.close();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
 
-        if (statusCode != 200) {
-            throw new IOException("\nHttp StatusCode: " + statusCode + "\nErrorMessage: " + result);
-        }
-        return result;
+                if (statusCode != 200) {
+                    try {
+                        throw new IOException("\nHttp StatusCode: " + statusCode + "\nErrorMessage: " + result);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                listener.onRecognize(result);
+                Logger.d(result);
+            }
+        }).start();
+
     }
+
 
     /**
      * 文字识别
@@ -215,18 +249,19 @@ public class RecognizeUtil {
         final StringBuilder result = new StringBuilder();
         HttpUtil.getInstance().httpPostBytes(Config.ChAR_BASE_URL, getPath, null, null, jsonBody.getBytes(Constants.CLOUDAPI_ENCODING), null, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Request request, IOException e) {
 
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Response response) throws IOException {
                 if (response.code() != 200) {
                     Logger.d(result.append("错误原因：").append(response.header("X-Ca-Error-Message")).append(Constants.CLOUDAPI_LF).append(Constants.CLOUDAPI_LF).toString());
                     return;
                 }
                 result.append(new String(response.body().bytes(), Constants.CLOUDAPI_ENCODING));
             }
+
         });
         return result.toString();
     }
@@ -237,12 +272,12 @@ public class RecognizeUtil {
         final StringBuilder result = new StringBuilder();
         HttpUtil.getInstance().httpPostBytes(Config.ID_CARD_BASE_URL, getPath, null, null, body.getBytes(Constants.CLOUDAPI_ENCODING), null, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Request request, IOException e) {
                 Logger.e(e.getMessage());
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Response response) throws IOException {
                 if (response.code() != 200) {
                     Logger.d("OCR", result.append("错误原因：").append(response.header("X-Ca-Error-Message")).append(Constants.CLOUDAPI_LF).append(Constants.CLOUDAPI_LF).toString());
                     return;
@@ -328,7 +363,7 @@ public class RecognizeUtil {
         return cardData;
     }
 
-    public static IdCardData parseIdCardJson(String json) {
+   /* public static IdCardData parseIdCardJson(String json) {
         OCRIdCardResultJson resultJson = new Gson().fromJson(json, OCRIdCardResultJson.class);
         OCRIdCardFaceDataJson faceDataJson= new Gson().fromJson(resultJson.getOutputs().get(0).getOutputValue().getDataValue(), OCRIdCardFaceDataJson.class);
         IdCardData idCardData = IdCardData.getInstance();
@@ -339,11 +374,12 @@ public class RecognizeUtil {
         idCardData.setAddress(faceDataJson.getAddress());
         idCardData.setNumber(faceDataJson.getNum());
         return idCardData;
-    }
+    }*/
 
 
-    public interface RecognizeListener {
-        void onRecognize(Bitmap bitmap);
+    public interface OnRecognizeListener {
+//                void onRecognize(Bitmap bitmap);
+        void onRecognize(String jsonResult);
     }
 
 

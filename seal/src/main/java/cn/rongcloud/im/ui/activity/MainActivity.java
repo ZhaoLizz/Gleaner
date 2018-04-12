@@ -32,6 +32,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
@@ -45,6 +46,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.rongcloud.im.R;
+import cn.rongcloud.im.bean.BitmapBodyJson;
 import cn.rongcloud.im.server.HomeWatcherReceiver;
 import cn.rongcloud.im.server.broadcast.BroadcastManager;
 import cn.rongcloud.im.server.utils.NToast;
@@ -57,6 +59,7 @@ import cn.rongcloud.im.ui.fragment.DiscoverFragment;
 import cn.rongcloud.im.ui.fragment.MineFragment;
 import cn.rongcloud.im.ui.widget.DragPointView;
 import cn.rongcloud.im.ui.widget.MorePopWindow;
+import cn.rongcloud.im.utils.RecognizeUtil;
 import id.zelory.compressor.Compressor;
 import io.rong.common.RLog;
 import io.rong.imkit.RongContext;
@@ -523,17 +526,34 @@ public class MainActivity extends FragmentActivity implements
                     selectUri = uri;
                     File file = new File(uri.getPath());
                     Logger.d("原始file大小：" + file.length() + "\n" + Arrays.toString(computeSize(uri.getPath())) + "\n" + file.getPath());
-
+                    File compressedFile = null;
                     try {
-                        File compressedFile = new Compressor(MainActivity.this)
+                        compressedFile = new Compressor(MainActivity.this)
                                 .setQuality(20)
                                 .compressToFile(file);
                         Logger.d("压缩后大小： \n " + Arrays.toString(computeSize(compressedFile.getPath())) + "\n" + compressedFile.getPath() + "\n" + compressedFile.length());
-
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    final File finalCompressedFile = compressedFile;
+
+
+                    /*new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+//                                String jsonBody = new Gson().toJson(new BitmapBodyJson(RecognizeUtil.file2Str(finalCompressedFile)));
+//                                String jsonResult = RecognizeUtil.sendPost(jsonBody);
+//                                Logger.d(jsonResult);
+//                                String itemName = RecognizeUtil.parseItemJson(jsonResult);
+//                                Logger.d(itemName);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).run();*/
+
                 }
             }
 
@@ -543,6 +563,7 @@ public class MainActivity extends FragmentActivity implements
             }
         });
     }
+
 
     static public final int REQUEST_CODE_ASK_PERMISSIONS = 101;
 

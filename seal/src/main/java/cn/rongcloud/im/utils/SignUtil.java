@@ -28,10 +28,10 @@ import java.util.TreeMap;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import cn.bmob.imdemo.Config;
-import cn.bmob.imdemo.constant.Constants;
-import cn.bmob.imdemo.constant.HttpHeader;
-import cn.bmob.imdemo.constant.SystemHeader;
+import cn.rongcloud.im.Config;
+import cn.rongcloud.im.constant.Constants;
+import cn.rongcloud.im.constant.HttpHeader;
+import cn.rongcloud.im.constant.SystemHeader;
 
 /**
  * 取自https://github.com/wangcui102300/ocr_api/
