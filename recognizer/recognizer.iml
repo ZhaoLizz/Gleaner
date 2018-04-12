@@ -94,8 +94,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/intermediate-jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
@@ -105,16 +107,16 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.android.support:support-media-compat-26.0.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-compat-26.0.0" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\IMLib\libs\Rong_IMLib.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\IMKit\src\main\libs\Rong_IMKit.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-core-utils-26.0.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-core-ui-26.0.0" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\recognizer\libs\Msc_1.1127.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-annotations:26.0.0@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-fragment-26.0.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-v4-26.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:26.0.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-fragment-26.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMKit/src/main/libs/Rong_IMKit.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-26.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMLib/libs/Rong_IMLib.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-26.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/recognizer/libs/Msc_1.1127.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-compat-26.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.0" level="project" />
     <orderEntry type="module" module-name="IMLib" />
     <orderEntry type="module" module-name="IMKit" />
   </component>

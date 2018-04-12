@@ -4,16 +4,20 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -30,7 +34,12 @@ import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -48,6 +57,7 @@ import cn.rongcloud.im.ui.fragment.DiscoverFragment;
 import cn.rongcloud.im.ui.fragment.MineFragment;
 import cn.rongcloud.im.ui.widget.DragPointView;
 import cn.rongcloud.im.ui.widget.MorePopWindow;
+import id.zelory.compressor.Compressor;
 import io.rong.common.RLog;
 import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
@@ -56,6 +66,8 @@ import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.message.ContactNotificationMessage;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 //import io.rong.toolkit.TestActivity;
 
 @SuppressWarnings("deprecation")
@@ -502,13 +514,26 @@ public class MainActivity extends FragmentActivity implements
     }
 
     private void initPhotoUtils() {
-        mPhotoUtils = new PhotoUtils(new PhotoUtils.OnPhotoResultListener() {
+        mPhotoUtils = new PhotoUtils();
+        mPhotoUtils.setOnPhotoResultListener(new PhotoUtils.OnPhotoResultListener() {
             @Override
             public void onPhotoResult(Uri uri) {
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
-                    Logger.d(uri);
+                    Logger.d(uri.getPath());
                     selectUri = uri;
-                    LoadDialog.show(mContext);
+                    File file = new File(uri.getPath());
+                    Logger.d("原始file大小：" + file.length() + "\n" + Arrays.toString(computeSize(uri.getPath())) + "\n" + file.getPath());
+
+                    try {
+                        File compressedFile = new Compressor(MainActivity.this)
+                                .setQuality(20)
+                                .compressToFile(file);
+                        Logger.d("压缩后大小： \n " + Arrays.toString(computeSize(compressedFile.getPath())) + "\n" + compressedFile.getPath() + "\n" + compressedFile.length());
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -582,4 +607,41 @@ public class MainActivity extends FragmentActivity implements
                 break;
         }
     }
+
+    private int[] computeSize(String srcImg) {
+        int[] size = new int[2];
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        options.inSampleSize = 1;
+
+        BitmapFactory.decodeFile(srcImg, options);
+        size[0] = options.outWidth;
+        size[1] = options.outHeight;
+
+        return size;
+    }
+
+    /*public String getRealFilePath(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }*/
 }

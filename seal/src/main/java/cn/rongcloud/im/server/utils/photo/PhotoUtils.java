@@ -2,6 +2,7 @@ package cn.rongcloud.im.server.utils.photo;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -13,10 +14,14 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.util.List;
 
 import cn.rongcloud.im.server.utils.CommonUtils;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 
 /**
@@ -50,10 +55,17 @@ public class PhotoUtils {
      **/
     private OnPhotoResultListener onPhotoResultListener;
 
+    private OnCompressListener onCompressListener;
+
 
     public PhotoUtils(OnPhotoResultListener onPhotoResultListener) {
         this.onPhotoResultListener = onPhotoResultListener;
     }
+
+    public PhotoUtils() {
+
+    }
+
 
     /**
      * 拍照
@@ -127,6 +139,12 @@ public class PhotoUtils {
         return list.size() > 0;
     }
 
+    /**
+     * 剪切正方形图片
+     * @param activity
+     * @param uri
+     * @return
+     */
     private boolean corp(Activity activity, Uri uri) {
         Intent cropIntent = new Intent("com.android.camera.action.CROP");
         cropIntent.setDataAndType(uri, "image/*");
@@ -236,12 +254,30 @@ public class PhotoUtils {
         void onPhotoCancel();
     }
 
+    public void setOnPhotoResultListener(OnPhotoResultListener onPhotoResultListener) {
+        this.onPhotoResultListener = onPhotoResultListener;
+    }
+
     public OnPhotoResultListener getOnPhotoResultListener() {
         return onPhotoResultListener;
     }
 
-    public void setOnPhotoResultListener(OnPhotoResultListener onPhotoResultListener) {
-        this.onPhotoResultListener = onPhotoResultListener;
+
+
+    public void setOnCompressListener(OnCompressListener onCompressListener) {
+        this.onCompressListener = onCompressListener;
+    }
+
+    public void compress(Context context,File file) {
+        String path = Environment.getExternalStorageDirectory() + "/Luban/image/";
+        Logger.d("test path: " + path);
+
+        Luban.with(context)
+                .load(file)                                   // 传人要压缩的图片列表
+//                .ignoreBy(100)// 忽略不压缩图片的大小
+                .setTargetDir(path)                        // 设置压缩后文件存储位置
+                .setCompressListener(onCompressListener)
+                .launch();    //启动压缩
     }
 
 }
