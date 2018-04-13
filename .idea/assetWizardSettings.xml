@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/home/zhaolizhi/Download/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/places/ic_golf_course_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/home/zhaolizhi/Download/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_edit_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -33,7 +33,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_found" />
+                                      <entry key="outputName" value="ic_glean" />
                                     </map>
                                   </option>
                                 </PersistentState>

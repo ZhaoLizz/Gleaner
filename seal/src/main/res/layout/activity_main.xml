@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/blue_semi_transparent"
                 fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
-                fab:fab_icon="@drawable/ic_found"
+                fab:fab_icon="@drawable/ic_glean"
                 fab:fab_size="normal"
                 fab:fab_title="发布失物招领"/>
 
@@ -46,6 +46,7 @@
                 android:id="@+id/btn_find"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                fab:fab_icon="@drawable/ic_found"
                 fab:fab_colorNormal="@color/blue_semi_transparent"
                 fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
                 fab:fab_size="normal"

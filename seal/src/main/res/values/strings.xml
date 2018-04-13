@@ -363,4 +363,5 @@
     <string name="cs_evaluate_input_must">必须输入建议</string>
     <string name="cs_evaluate_select_must">必选</string>
     <string name="title_activity_luanch">LuanchActivity</string>
+    <string name="title_activity_connect_gleaner">ConnectGleanerActivity</string>
 </resources>

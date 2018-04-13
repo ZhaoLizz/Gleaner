@@ -124,7 +124,9 @@
     <orderEntry type="library" name="Gradle: com.getbase:floatingactionbutton-1.10.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/happy-dns-0.2.3.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: commons-cli:commons-cli:1.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-25.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.huawei.android.hms:base-2.5.3.305" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-25.0.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/MiPush_SDK_Client_3_5_1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/sticker/libs/BQMMRongCloudPlugin-v2.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/aip-java-sdk-4.2.0.jar:unspecified@jar" level="project" />
@@ -137,11 +139,13 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-compat-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/okhttp-2.7.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/sun.misc.BASE64Decoder.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:transition-25.0.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/qiniu-android-sdk-7.1.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support:multidex-instrumentation-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/okio-1.6.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava2:rxjava:2.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.orhanobut:logger-2.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-23.2.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMKit/src/main/libs/Rong_IMKit.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/CallEngine_Agora.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:glide:3.7.0@jar" level="project" />
@@ -162,13 +166,16 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:2.0.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/Rong_CallLib.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-25.0.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/AMap_Channel_Location_V1.4.0_20160708.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/AMap_Search_V3.4.0_20160811.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.CymChad:BaseRecyclerViewAdapterHelper-2.9.30" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.huawei.android.hms:push-2.5.3.305" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/recognizer/libs/Msc_1.1127.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:design-25.0.1" level="project" />
     <orderEntry type="library" name="Gradle: cn.bmob.android:bmob-sdk:3.4.6@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/RedPacket/libs/jrmfry-1.5.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMLib/libs/Rong_IMLib.jar:unspecified@jar" level="project" />

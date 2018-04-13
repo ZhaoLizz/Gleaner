@@ -22,13 +22,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UploadBatchListener;
+import cn.bmob.v3.listener.UploadFileListener;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.bean.BitmapBodyJson;
 import cn.rongcloud.im.bean.Thing;
@@ -109,10 +113,11 @@ public class LuanchActivity extends Activity {
                     String itemName = RecognizeUtil.parseItemJson(jsonResult);
                     Logger.d(itemName);
                     if (itemName.equals("校园卡")) {
-                        RecognizeUtil.readTextImgByBaidu(photoFile, new RecognizeUtil.OnRecognizeListener() {
+                        RecognizeUtil.readTextImgByBaidu(compressedFile, new RecognizeUtil.OnRecognizeListener() {
                             @Override
                             public void onRecognize(String jsonResult) {
                                 Map<String, String> schoolcardMessage = RecognizeUtil.parseSchoolJson(jsonResult);
+                                //idcard
                                 if (schoolcardMessage.get("card").equals("身份证")) {
                                     thing = new Thing();
                                     String name = schoolcardMessage.get("name");
@@ -122,6 +127,7 @@ public class LuanchActivity extends Activity {
                                     String birth = schoolcardMessage.get("birth");
                                     String home = schoolcardMessage.get("home");
                                     updataIdCardUI(name, sex, nation, home, number, location, curTime);
+                                    thing.setItemtype(Thing.IDCARD);
                                     thing.setName(name);
                                     thing.setNumber(number);
                                     thing.setNation(nation);
@@ -129,8 +135,10 @@ public class LuanchActivity extends Activity {
                                     thing.setHomeLocation(home);
                                     thing.setUser(user);
                                 } else {
+                                    //school card
                                     updataSchoolCardUI(schoolcardMessage.get("name"), schoolcardMessage.get("number"), schoolcardMessage.get("college"), curTime, location);
                                     thing = new Thing();
+                                    thing.setItemtype(Thing.SCHOOLCARD);
                                     thing.setUser(user);
                                     thing.setItemName("校园卡");
                                     thing.setName(schoolcardMessage.get("name"));
@@ -144,6 +152,7 @@ public class LuanchActivity extends Activity {
                     } else {
                         updataItemUI(itemName, location, curTime);
                         thing = new Thing();
+                        thing.setItemtype(Thing.ITEM);
                         thing.setUser(user);
                         thing.setItemName(itemName);
                         thing.setLocation(location);
@@ -173,18 +182,55 @@ public class LuanchActivity extends Activity {
 
     @OnClick(R.id.publish_good_publish_btn)
     public void onViewClicked() {
+        mPublishProgress.setVisibility(View.VISIBLE);
         Toast.makeText(this, "正在上传至服务器...", Toast.LENGTH_SHORT).show();
-        thing.save(LuanchActivity.this, new SaveListener() {
-            @Override
-            public void onSuccess() {
-                Logger.d("succeed");
-            }
+        if (thing.getItemType() == Thing.ITEM || thing.getItemType() == Thing.SCHOOLCARD) {
+            BmobFile.uploadBatch(LuanchActivity.this, new String[]{compressedFile.getPath()}, new UploadBatchListener() {
+                @Override
+                public void onSuccess(List<BmobFile> list, List<String> urls) {
+                    thing.setPhotoUrl(urls.get(0));
+                    thing.save(LuanchActivity.this, new SaveListener() {
+                        @Override
+                        public void onSuccess() {
+                            Logger.d("succeed");
+                            mPublishProgress.setVisibility(View.GONE);
+                            Toast.makeText(LuanchActivity.this, "成功上传数据!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
 
-            @Override
-            public void onFailure(int i, String s) {
-                Logger.d(s);
-            }
-        });
+                        @Override
+                        public void onFailure(int i, String s) {
+                            Logger.d(s);
+                        }
+                    });
+                }
+
+                @Override
+                public void onProgress(int i, int i1, int i2, int i3) {
+
+                }
+
+                @Override
+                public void onError(int i, String s) {
+
+                }
+            });
+        } else {
+            thing.save(LuanchActivity.this, new SaveListener() {
+                @Override
+                public void onSuccess() {
+                    Logger.d("succeed");
+                    mPublishProgress.setVisibility(View.GONE);
+                    Toast.makeText(LuanchActivity.this, "成功上传数据!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    Logger.e(s);
+                }
+            });
+        }
     }
 
     private void updataItemUI(final String name, final String location, final String time) {

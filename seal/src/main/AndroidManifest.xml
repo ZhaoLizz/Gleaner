@@ -64,7 +64,9 @@
 
     <!-- 如果是安卓8.0，应用编译配置的targetSdkVersion>=26，请务必添加以下权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- 华为 配置结束 < -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- 华为 配置结束 < -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -574,6 +576,10 @@
         <activity
             android:name=".ui.activity.LuanchActivity"
             android:label="@string/title_activity_luanch">
+        </activity>
+        <activity
+            android:name=".ui.activity.ConnectGleanerActivity"
+            android:label="@string/title_activity_connect_gleaner">
         </activity>
     </application>
 

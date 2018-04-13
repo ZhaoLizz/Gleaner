@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -27,22 +26,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.rongcloud.im.R;
-import cn.rongcloud.im.bean.BitmapBodyJson;
 import cn.rongcloud.im.server.HomeWatcherReceiver;
 import cn.rongcloud.im.server.broadcast.BroadcastManager;
 import cn.rongcloud.im.server.utils.NToast;
@@ -53,9 +45,9 @@ import cn.rongcloud.im.ui.adapter.ConversationListAdapterEx;
 import cn.rongcloud.im.ui.fragment.ContactsFragment;
 import cn.rongcloud.im.ui.fragment.DiscoverFragment;
 import cn.rongcloud.im.ui.fragment.MineFragment;
+import cn.rongcloud.im.ui.fragment.ThingsListFragment;
 import cn.rongcloud.im.ui.widget.DragPointView;
 import cn.rongcloud.im.ui.widget.MorePopWindow;
-import cn.rongcloud.im.utils.RecognizeUtil;
 import io.rong.common.RLog;
 import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
@@ -147,7 +139,8 @@ public class MainActivity extends FragmentActivity implements
 
         mFragment.add(conversationList);
         mFragment.add(new ContactsFragment());
-        mFragment.add(new DiscoverFragment());
+        mFragment.add(new ThingsListFragment());
+//        mFragment.add(new DiscoverFragment());
         mFragment.add(new MineFragment());
         FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -161,6 +154,7 @@ public class MainActivity extends FragmentActivity implements
             }
         };
         mViewPager.setAdapter(fragmentPagerAdapter);
+        mViewPager.setCurrentItem(0);
         mViewPager.setOffscreenPageLimit(4);
         mViewPager.setOnPageChangeListener(this);
         initData();
@@ -590,41 +584,4 @@ public class MainActivity extends FragmentActivity implements
                 break;
         }
     }
-
-    private int[] computeSize(String srcImg) {
-        int[] size = new int[2];
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        options.inSampleSize = 1;
-
-        BitmapFactory.decodeFile(srcImg, options);
-        size[0] = options.outWidth;
-        size[1] = options.outHeight;
-
-        return size;
-    }
-
-    /*public String getRealFilePath(final Context context, final Uri uri) {
-        if (null == uri) return null;
-        final String scheme = uri.getScheme();
-        String data = null;
-        if (scheme == null)
-            data = uri.getPath();
-        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
-            data = uri.getPath();
-        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
-            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
-            if (null != cursor) {
-                if (cursor.moveToFirst()) {
-                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                    if (index > -1) {
-                        data = cursor.getString(index);
-                    }
-                }
-                cursor.close();
-            }
-        }
-        return data;
-    }*/
 }
