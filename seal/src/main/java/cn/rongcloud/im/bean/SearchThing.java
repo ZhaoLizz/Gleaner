@@ -1,5 +1,7 @@
 package cn.rongcloud.im.bean;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 import cn.rongcloud.im.db.UserInfoBean;
 
@@ -7,7 +9,7 @@ import cn.rongcloud.im.db.UserInfoBean;
  * Created by qinba on 2018/4/14.
  */
 
-public class SearchThing extends BmobObject{
+public class SearchThing extends BmobObject implements Serializable{
     private String itemName;
     private String location;
     private String time;

@@ -24,6 +24,7 @@ import cn.rongcloud.im.R;
 import cn.rongcloud.im.SealAppContext;
 import cn.rongcloud.im.SealConst;
 import cn.rongcloud.im.SealUserInfoManager;
+import cn.rongcloud.im.bean.SearchThing;
 import cn.rongcloud.im.bean.Thing;
 import cn.rongcloud.im.db.Friend;
 import cn.rongcloud.im.db.UserInfoBean;
@@ -83,6 +84,8 @@ public class ConnectGleanerActivity extends BaseActivity {
     private String mPhone = "";
     private UserInfoBean mUser;
     private Friend mFriend;
+    private Thing thing;
+    private SearchThing searchThing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,29 +93,36 @@ public class ConnectGleanerActivity extends BaseActivity {
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        Thing thing = (Thing) intent.getSerializableExtra("thing");
-        mUser = BmobUser.getCurrentUser(this, UserInfoBean.class);
-        mPhone = mUser.getUsername();
-        Logger.d(mPhone);
+        thing = (Thing) intent.getSerializableExtra("thing");
+        searchThing = (SearchThing) intent.getSerializableExtra("searching");
 
-        Glide.with(ConnectGleanerActivity.this).load(thing.getPhotoUrl())
-                .skipMemoryCache(true) // 不使用内存缓存
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(img_publish_good);
-        switch (thing.getItemType()) {
-            case Thing.ITEM:
-                Logger.d(thing.getItemName() + thing.getLocation() + thing.getTime());
-                updataItemUI(thing.getItemName(), thing.getLocation(), thing.getTime());
-                break;
-            case Thing.SCHOOLCARD:
-                Logger.d(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
-                updataSchoolCardUI(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
-                break;
-            case Thing.IDCARD:
-                Logger.d(thing.getName()+thing.getSex()+ thing.getNation()+ thing.getHomeLocation()+ thing.getNumber()+thing.getLocation()+ thing.getTime());
-                updataIdCardUI(thing.getName(), thing.getSex(), thing.getNation(), thing.getHomeLocation(), thing.getNumber(), thing.getLocation(), thing.getTime());
-                break;
+
+        if (thing != null) {
+
+
+            Glide.with(ConnectGleanerActivity.this).load(thing.getPhotoUrl())
+                    .skipMemoryCache(true) // 不使用内存缓存
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(img_publish_good);
+            switch (thing.getItemType()) {
+                case Thing.ITEM:
+                    Logger.d(thing.getItemName() + thing.getLocation() + thing.getTime());
+                    updataItemUI(thing.getItemName(), thing.getLocation(), thing.getTime());
+                    break;
+                case Thing.SCHOOLCARD:
+                    Logger.d(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
+                    updataSchoolCardUI(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
+                    break;
+                case Thing.IDCARD:
+                    Logger.d(thing.getName()+thing.getSex()+ thing.getNation()+ thing.getHomeLocation()+ thing.getNumber()+thing.getLocation()+ thing.getTime());
+                    updataIdCardUI(thing.getName(), thing.getSex(), thing.getNation(), thing.getHomeLocation(), thing.getNumber(), thing.getLocation(), thing.getTime());
+                    break;
+            }
+        } else if (searchThing != null) {
+            Logger.d("searchThing not null" );
+            updateFindItemUI(searchThing.getItemName(), searchThing.getLocation(), "", searchThing.getDescription());
         }
+
     }
 
     private void updataItemUI(final String name, final String location, final String time) {
@@ -122,7 +132,21 @@ public class ConnectGleanerActivity extends BaseActivity {
         tv_1st_l.setText("物品名称");
         tv_1st_r.setText(name);
         tv_3st_r.setText(location);
+        tv_2st_l.setText("获取时间");
         tv_2st_r.setText(time);
+    }
+
+    private void updateFindItemUI(String name, String location, String time, String descrip) {
+        mPublishProgress.setVisibility(View.GONE);
+        mPublishLocationLayout.setVisibility(View.GONE);
+        mPublishTimeLayout.setVisibility(View.GONE);
+        tv_1st_l.setText("物品名称");
+        tv_1st_r.setText(name);
+        tv_3st_r.setText(location);
+        tv_2st_l.setText("物品描述");
+        tv_2st_r.setText(descrip);
+
+
     }
 
     private void updataSchoolCardUI(final String name, final String number, final String college, final String time, final String location) {
@@ -174,8 +198,14 @@ public class ConnectGleanerActivity extends BaseActivity {
         });
     }
 
+
     @OnClick(R.id.publish_good_publish_btn)
     public void onViewClicked() {
+        if (thing != null) {
+            
+        } else if (searchThing != null) {
+
+        }
         addFirend();
     }
 

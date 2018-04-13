@@ -15,8 +15,8 @@ import cn.rongcloud.im.bean.SearchThing;
  */
 
 public class SearchListAdapter extends BaseQuickAdapter<SearchThing,BaseViewHolder> {
-    public SearchListAdapter(@Nullable List<SearchThing> data) {
-        super(data);
+    public SearchListAdapter(int layoutResId,@Nullable List<SearchThing> data) {
+        super(layoutResId,data);
     }
 
     @Override

@@ -229,12 +229,13 @@
     </LinearLayout>
 
     <Button
+        android:text="获取联系"
         android:id="@+id/publish_good_publish_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@drawable/publish"/>
+        android:background="@drawable/btn_backfground"/>
 
     <ProgressBar
         android:id="@+id/publish_progress"
