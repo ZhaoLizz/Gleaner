@@ -39,6 +39,7 @@ import javax.crypto.spec.SecretKeySpec;
 import Decoder.BASE64Encoder;
 import cn.rongcloud.im.Config;
 import cn.rongcloud.im.bean.ImageBody;
+import cn.rongcloud.im.bean.OCRBaiduText;
 import cn.rongcloud.im.bean.OCRCharDataJson;
 import cn.rongcloud.im.bean.Tags;
 import cn.rongcloud.im.constant.Constants;
@@ -237,36 +238,7 @@ public class RecognizeUtil {
 
     }
 
-
-    /**
-     * 文字识别
-     *
-     * @param jsonBody
-     * @return
-     */
-    public static String readTextImg(String jsonBody) {
-        String getPath = "/api/predict/ocr_general";
-        final StringBuilder result = new StringBuilder();
-        HttpUtil.getInstance().httpPostBytes(Config.ChAR_BASE_URL, getPath, null, null, jsonBody.getBytes(Constants.CLOUDAPI_ENCODING), null, new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                if (response.code() != 200) {
-                    Logger.d(result.append("错误原因：").append(response.header("X-Ca-Error-Message")).append(Constants.CLOUDAPI_LF).append(Constants.CLOUDAPI_LF).toString());
-                    return;
-                }
-                result.append(new String(response.body().bytes(), Constants.CLOUDAPI_ENCODING));
-            }
-        });
-        Logger.d(result.toString());
-        return result.toString();
-    }
-
-    public static void readTextImgByBaidu(File file) {
+    public static void readTextImgByBaidu(File file, OnRecognizeListener listener) {
         final String APP_ID = "11086346";
         final String API_KEY = "VrWfpupF41Dt3LEdtjF8uyaB";
         final String SECRET_KEY = "aMYGjI4RBvRq2qF5QCzwxqFZKvHPjEK4";
@@ -281,8 +253,8 @@ public class RecognizeUtil {
         JSONObject res = client.basicGeneral(image, options);
         try {
             String jsonResult = res.toString(2);
-            Logger.d(jsonResult);
-
+            Log.d("recognize json", jsonResult);
+            listener.onRecognize(jsonResult);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -327,7 +299,7 @@ public class RecognizeUtil {
                     //调参权重
                     for (Tags tag : imageTags) {
                         String value = tag.getValue();  //识别结果
-                        if (value.equals("名片") || value.equals("香烟") || value.equals("菜单") || value.equals("创可贴")) {
+                        if (value.equals("名片") || value.equals("香烟") || value.equals("菜单") || value.equals("创可贴") || value.equals("信封")) {
                             result = "校园卡";
                             return result;
                         } else if (value.equals("钱")) {
@@ -346,6 +318,7 @@ public class RecognizeUtil {
 
     /**
      * 解析校园卡识别返回的json
+     *
      * @param json
      * @return
      */
@@ -354,62 +327,41 @@ public class RecognizeUtil {
         cardData.put("name", "未成功识别");
         cardData.put("number", "未成功识别");
         cardData.put("college", "未成功识别");
-        OCRCharDataJson data = new Gson().fromJson(json, OCRCharDataJson.class);
-        if (data != null) {
-            for (OCRCharDataJson.Ret ret : data.getRet()) {
-                if (ret != null) {
-                    String message = ret.getWord();
-                    Log.d("card", message);
-                    if (message.contains("名") || message.contains("姓")) {
-                        if (message.contains(":")) {
-                            cardData.put("name", message.substring(message.lastIndexOf(":") + 1));
-                        } else {
-                            cardData.put("name", message);
-                        }
-                    } else if (message.contains("号")) {
-                        if (message.contains(":")) {
-                            cardData.put("number", message.substring(message.lastIndexOf(":") + 1));
-                        } else {
-                            cardData.put("number", message);
-                        }
-                    } else if (message.contains("院")) {
-                        if (message.contains(":")) {
-                            cardData.put("college", message.substring(message.lastIndexOf(":") + 1));
-                        } else {
-                            cardData.put("college", message);
-                        }
-                    }
+
+        OCRBaiduText ocrBaiduText = new Gson().fromJson(json, OCRBaiduText.class);
+        List<OCRBaiduText.WordsResultBean> wordsResultBeans = ocrBaiduText.getWords_result();
+        for (OCRBaiduText.WordsResultBean wordsResultBean : wordsResultBeans) {
+            String message = wordsResultBean.getWords();
+            Log.d("readtext", message);
+            if (message.contains("名") || message.contains("姓")) {
+                if (message.contains(":")) {
+                    cardData.put("name", message.substring(message.lastIndexOf(":") + 1));
                 } else {
-                    Logger.d("ret == null");
+                    cardData.put("name", message);
+                }
+            } else if (message.contains("号")) {
+                if (message.contains(":")) {
+                    cardData.put("number", message.substring(message.lastIndexOf(":") + 1));
+                } else {
+                    cardData.put("number", message);
+                }
+            } else if (message.contains("院")) {
+                if (message.contains(":")) {
+                    cardData.put("college", message.substring(message.lastIndexOf(":") + 1));
+                } else {
+                    cardData.put("college", message);
                 }
             }
+
         }
         return cardData;
     }
 
-   /* public static IdCardData parseIdCardJson(String json) {
-        OCRIdCardResultJson resultJson = new Gson().fromJson(json, OCRIdCardResultJson.class);
-        OCRIdCardFaceDataJson faceDataJson= new Gson().fromJson(resultJson.getOutputs().get(0).getOutputValue().getDataValue(), OCRIdCardFaceDataJson.class);
-        IdCardData idCardData = IdCardData.getInstance();
-        idCardData.reset();
-        idCardData.setName(faceDataJson.getName());
-        idCardData.setSex(faceDataJson.getSex());
-        idCardData.setNation(faceDataJson.getNationality());
-        idCardData.setAddress(faceDataJson.getAddress());
-        idCardData.setNumber(faceDataJson.getNum());
-        return idCardData;
-    }*/
-
 
     public interface OnRecognizeListener {
-//                void onRecognize(Bitmap bitmap);
+        //                void onRecognize(Bitmap bitmap);
         void onRecognize(String jsonResult);
     }
-
-    public interface OnReadTextListener {
-        void onReadText(List<String> textMessages);
-    }
-
 
 
 }

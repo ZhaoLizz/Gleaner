@@ -34,6 +34,7 @@ import cn.rongcloud.im.server.widget.SelectableRoundedImageView;
 import io.rong.imageloader.core.ImageLoader;
 import io.rong.imlib.model.UserInfo;
 
+//添加好友
 public class SearchFriendActivity extends BaseActivity {
 
     private static final int CLICK_CONVERSATION_USER_PORTRAIT = 1;

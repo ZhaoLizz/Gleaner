@@ -4,20 +4,17 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -36,12 +33,11 @@ import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -60,7 +56,6 @@ import cn.rongcloud.im.ui.fragment.MineFragment;
 import cn.rongcloud.im.ui.widget.DragPointView;
 import cn.rongcloud.im.ui.widget.MorePopWindow;
 import cn.rongcloud.im.utils.RecognizeUtil;
-import id.zelory.compressor.Compressor;
 import io.rong.common.RLog;
 import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
@@ -69,8 +64,6 @@ import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.message.ContactNotificationMessage;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
 //import io.rong.toolkit.TestActivity;
 
 @SuppressWarnings("deprecation")
@@ -522,11 +515,15 @@ public class MainActivity extends FragmentActivity implements
             @Override
             public void onPhotoResult(Uri uri) {
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
-                    Logger.d(uri.getPath());
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.putExtra("photoUri", uri.getPath());
+                    startActivity(intent);
+
+
+
                     selectUri = uri;
                     final File file = new File(uri.getPath());
                     Logger.d("原始file大小：" + file.length() + "\n" + Arrays.toString(computeSize(uri.getPath())) + "\n" + file.getPath());
-                    File compressedFile = null;
 
                     //compress
 //                    try {
@@ -549,19 +546,20 @@ public class MainActivity extends FragmentActivity implements
                             public void onRecognize(String jsonResult) {
                                 String itemName = RecognizeUtil.parseItemJson(jsonResult);
                                 Logger.d(itemName);
-                                RecognizeUtil.readTextImgByBaidu(file);
-
-
                                 if (itemName.equals("校园卡")) {
-//                                    String charJsonBody = " {\"image\":\" " + base64Str + "\", \"configure\":\"{\\\"min_size\\\" : 16,\\\"output_prob\\\" : true }\"}";
-//                                    String cardResult = RecognizeUtil.readTextImg(charJsonBody);
-//                                    Logger.d(cardResult);
+                                    RecognizeUtil.readTextImgByBaidu(file, new RecognizeUtil.OnRecognizeListener() {
+                                        @Override
+                                        public void onRecognize(String jsonResult) {
+                                            Map<String, String> schoolcardMessage = RecognizeUtil.parseSchoolJson(jsonResult);
+                                            Logger.d(schoolcardMessage.get("name") + "\n"
+                                                    + schoolcardMessage.get("number") + "\n"
+                                                    + schoolcardMessage.get("college")
+                                            );
+                                        }
+                                    });
                                 }
-
-
                             }
                         });
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
