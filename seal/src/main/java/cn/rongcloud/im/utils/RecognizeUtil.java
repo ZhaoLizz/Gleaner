@@ -324,15 +324,19 @@ public class RecognizeUtil {
      */
     public static Map<String, String> parseSchoolJson(String json) {
         Map<String, String> cardData = new HashMap<>();
+        cardData.put("card", "校园卡");
         cardData.put("name", "未成功识别");
         cardData.put("number", "未成功识别");
         cardData.put("college", "未成功识别");
+        cardData.put("nation", "未成功识别");
+        cardData.put("sex", "未成功识别");
+        cardData.put("birth", "未成功识别");
+        cardData.put("home", "未成功识别");
 
         OCRBaiduText ocrBaiduText = new Gson().fromJson(json, OCRBaiduText.class);
         List<OCRBaiduText.WordsResultBean> wordsResultBeans = ocrBaiduText.getWords_result();
         for (OCRBaiduText.WordsResultBean wordsResultBean : wordsResultBeans) {
             String message = wordsResultBean.getWords();
-            Log.d("readtext", message);
             if (message.contains("名") || message.contains("姓")) {
                 if (message.contains(":")) {
                     cardData.put("name", message.substring(message.lastIndexOf(":") + 1));
@@ -341,22 +345,53 @@ public class RecognizeUtil {
                 }
             } else if (message.contains("号")) {
                 if (message.contains(":")) {
-                    cardData.put("number", message.substring(message.lastIndexOf(":") + 1));
+                    cardData.put("number", message.substring(message.lastIndexOf(":") + 1).substring(0, 10));
                 } else {
                     cardData.put("number", message);
                 }
             } else if (message.contains("院")) {
                 if (message.contains(":")) {
-                    cardData.put("college", message.substring(message.lastIndexOf(":") + 1));
+                    cardData.put("college", message.substring(message.lastIndexOf(":") + 1, message.lastIndexOf("院") + 1));
                 } else {
                     cardData.put("college", message);
                 }
+            } else if (message.contains("性") || message.contains("别") || message.contains("住址")) {
+                //idcard
+                cardData.put("card", "身份证");
+                for (int i = 0; i < wordsResultBeans.size(); i++) {
+                    String idmsg = wordsResultBeans.get(i).getWords();
+                    if (idmsg.contains("名") || idmsg.contains("姓")) {
+                        cardData.put("name", idmsg.substring(idmsg.lastIndexOf("名") + 1));
+                    } else if (idmsg.contains("别")) {
+                        String sex = idmsg.substring(idmsg.lastIndexOf("别") + 1, idmsg.lastIndexOf("别") + 2);
+                        cardData.put("sex", sex);
+
+                        String nation = idmsg.substring(idmsg.lastIndexOf("族") + 1);
+                        cardData.put("nation", nation);
+                    } else if (idmsg.contains("生") || idmsg.contains("出")) {
+                        String birth = idmsg.substring(idmsg.lastIndexOf("生") + 1);
+                        cardData.put("birth", birth);
+                    } else if (idmsg.contains("住址")) {
+                        String home = idmsg.substring(idmsg.lastIndexOf("址") + 1);
+                        if (!wordsResultBeans.get(i).getWords().contains("身")) {
+                            home += wordsResultBeans.get(i + 1).getWords();
+                        }
+                        cardData.put("home", home);
+                    } else if (idmsg.contains("公民")) {
+                        String number = idmsg.substring(idmsg.lastIndexOf("码") + 1);
+                        cardData.put("number", number);
+                    }
+                }
+                break;
             }
 
         }
         return cardData;
     }
 
+    private Map<String, String> parseIdCard(List<OCRBaiduText.WordsResultBean> wordsResultBeans) {
+        return null;
+    }
 
     public interface OnRecognizeListener {
         //                void onRecognize(Bitmap bitmap);

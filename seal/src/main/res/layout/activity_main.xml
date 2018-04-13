@@ -20,35 +20,37 @@
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            fab:fab_addButtonColorNormal="@color/white"
-            fab:fab_addButtonColorPressed="@color/white_pressed"
-            fab:fab_addButtonPlusIconColor="@color/half_black"
-            fab:fab_addButtonSize="mini"
+            android:layout_alignParentRight="true"
+            fab:fab_addButtonColorNormal="@color/blue_semi_transparent"
+            fab:fab_colorNormal="@color/blue_semi_transparent"
+            fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
+            fab:fab_addButtonSize="normal"
+            fab:fab_labelStyle="@style/menu_labels_style"
             fab:fab_labelsPosition="left">
+
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_glean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_colorPressed="@color/white_pressed"
-                fab:fab_size="mini"
+                fab:fab_colorNormal="@color/blue_semi_transparent"
+                fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
+                fab:fab_icon="@drawable/ic_found"
+                fab:fab_size="normal"
                 fab:fab_title="发布失物招领"/>
+
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_find"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_colorPressed="@color/white_pressed"
-                fab:fab_size="mini"
+                fab:fab_colorNormal="@color/blue_semi_transparent"
+                fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
+                fab:fab_size="normal"
                 fab:fab_title="发布寻物启事"/>
+
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

@@ -200,5 +200,9 @@
         <item name="android:background">#E5E5E5</item>
     </style>
 
+    <style name="menu_labels_style">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 </resources>

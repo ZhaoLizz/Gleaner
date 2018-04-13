@@ -92,6 +92,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="35dp"
             android:layout_weight="1"
+            android:text="汉"
             android:gravity="center_vertical"
             android:textColor="@android:color/black"
             android:textSize="18sp"

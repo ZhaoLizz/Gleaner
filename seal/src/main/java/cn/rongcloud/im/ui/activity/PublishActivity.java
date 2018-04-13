@@ -1,7 +1,6 @@
 package cn.rongcloud.im.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -70,14 +69,65 @@ public class PublishActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
+        Logger.d("onCreate");
 
-        Intent intent = getIntent();
-        String photoPath = intent.getStringExtra("photoUri");
-        
+//        Intent intent = getIntent();
+//        String photoPath = intent.getStringExtra("photoUri");
+//        final File file = new File(photoPath);
+//        Logger.d("大小：" + "\n" + file.length());
+
+        /*
+        Glide.with(this).load(file).into(img_publish_good);
+        mPublishProgress.setVisibility(View.VISIBLE);
+
+        //compress
+//                    try {
+//                        compressedFile = new Compressor(MainActivity.this)
+//                                .setQuality(20)
+//                                .compressToFile(file);
+//                        Logger.d("压缩后大小： \n " + Arrays.toString(computeSize(compressedFile.getPath())) + "\n" + compressedFile.getPath() + "\n" + compressedFile.length());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    final File finalCompressedFile = compressedFile;
+
+        final String curTime = Calendar.getInstance().getTime().toString();
+        final String location = "山西省太原市尖草坪区上兰村中北大学主楼";位置
+        UserInfoBean user = BmobUser.getCurrentUser(this, UserInfoBean.class);
+
+        final String base64Str = RecognizeUtil.file2Str(file);
+        String jsonBody = new Gson().toJson(new BitmapBodyJson(base64Str));
+        try {
+            RecognizeUtil.sendPost(jsonBody, new RecognizeUtil.OnRecognizeListener() {
+                @Override
+                public void onRecognize(String jsonResult) {
+                    String itemName = RecognizeUtil.parseItemJson(jsonResult);
+                    Logger.d(itemName);
+                    if (itemName.equals("校园卡")) {
+                        RecognizeUtil.readTextImgByBaidu(file, new RecognizeUtil.OnRecognizeListener() {
+                            @Override
+                            public void onRecognize(String jsonResult) {
+                                Map<String, String> schoolcardMessage = RecognizeUtil.parseSchoolJson(jsonResult);
+                                Logger.d(schoolcardMessage.get("name") + "\n"
+                                        + schoolcardMessage.get("number") + "\n"
+                                        + schoolcardMessage.get("college"));
+                                updataSchoolCardUI(schoolcardMessage.get("name"), schoolcardMessage.get("number"), schoolcardMessage.get("college"), curTime, location);
+                            }
+                        });
+                    } else if (itemName.equals("身份证")) {
+
+                    } else {
+                        updataItemUI(itemName, location, curTime);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
     }
 
 
-    
     private void updataItemUI(final String name, final String location, final String time) {
         runOnUiThread(new Runnable() {
             @Override

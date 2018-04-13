@@ -20,8 +20,6 @@ import java.io.File;
 import java.util.List;
 
 import cn.rongcloud.im.server.utils.CommonUtils;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
 
 
 /**
@@ -54,9 +52,6 @@ public class PhotoUtils {
      * PhotoUtils对象
      **/
     private OnPhotoResultListener onPhotoResultListener;
-
-    private OnCompressListener onCompressListener;
-
 
     public PhotoUtils(OnPhotoResultListener onPhotoResultListener) {
         this.onPhotoResultListener = onPhotoResultListener;
@@ -260,24 +255,6 @@ public class PhotoUtils {
 
     public OnPhotoResultListener getOnPhotoResultListener() {
         return onPhotoResultListener;
-    }
-
-
-
-    public void setOnCompressListener(OnCompressListener onCompressListener) {
-        this.onCompressListener = onCompressListener;
-    }
-
-    public void compress(Context context,File file) {
-        String path = Environment.getExternalStorageDirectory() + "/Luban/image/";
-        Logger.d("test path: " + path);
-
-        Luban.with(context)
-                .load(file)                                   // 传人要压缩的图片列表
-//                .ignoreBy(100)// 忽略不压缩图片的大小
-                .setTargetDir(path)                        // 设置压缩后文件存储位置
-                .setCompressListener(onCompressListener)
-                .launch();    //启动压缩
     }
 
 }

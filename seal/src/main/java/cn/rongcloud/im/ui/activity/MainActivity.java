@@ -81,7 +81,6 @@ public class MainActivity extends FragmentActivity implements
     private ImageView mSearchImageView;
     private BottomMenuDialog dialog;
     private PhotoUtils mPhotoUtils;
-    private Uri selectUri;
 
     /**
      * 会话列表的fragment
@@ -499,12 +498,10 @@ public class MainActivity extends FragmentActivity implements
         switch (view.getId()) {
             //失物招领
             case R.id.btn_glean:
-                Toast.makeText(mContext, "失物招领", Toast.LENGTH_SHORT).show();
                 showPhotoDialog();
                 break;
             //寻物启示
             case R.id.btn_find:
-                Toast.makeText(mContext, "寻物其实", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -515,54 +512,9 @@ public class MainActivity extends FragmentActivity implements
             @Override
             public void onPhotoResult(Uri uri) {
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(MainActivity.this, LuanchActivity.class);
                     intent.putExtra("photoUri", uri.getPath());
                     startActivity(intent);
-
-
-
-                    selectUri = uri;
-                    final File file = new File(uri.getPath());
-                    Logger.d("原始file大小：" + file.length() + "\n" + Arrays.toString(computeSize(uri.getPath())) + "\n" + file.getPath());
-
-                    //compress
-//                    try {
-//                        compressedFile = new Compressor(MainActivity.this)
-//                                .setQuality(20)
-//                                .compressToFile(file);
-//                        Logger.d("压缩后大小： \n " + Arrays.toString(computeSize(compressedFile.getPath())) + "\n" + compressedFile.getPath() + "\n" + compressedFile.length());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    final File finalCompressedFile = compressedFile;
-
-                    try {
-//                        final String base64Str = RecognizeUtil.file2Str(finalCompressedFile);
-                        final String base64Str = RecognizeUtil.file2Str(file);
-                        String jsonBody = new Gson().toJson(new BitmapBodyJson(base64Str));
-
-                        RecognizeUtil.sendPost(jsonBody, new RecognizeUtil.OnRecognizeListener() {
-                            @Override
-                            public void onRecognize(String jsonResult) {
-                                String itemName = RecognizeUtil.parseItemJson(jsonResult);
-                                Logger.d(itemName);
-                                if (itemName.equals("校园卡")) {
-                                    RecognizeUtil.readTextImgByBaidu(file, new RecognizeUtil.OnRecognizeListener() {
-                                        @Override
-                                        public void onRecognize(String jsonResult) {
-                                            Map<String, String> schoolcardMessage = RecognizeUtil.parseSchoolJson(jsonResult);
-                                            Logger.d(schoolcardMessage.get("name") + "\n"
-                                                    + schoolcardMessage.get("number") + "\n"
-                                                    + schoolcardMessage.get("college")
-                                            );
-                                        }
-                                    });
-                                }
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
             }
 

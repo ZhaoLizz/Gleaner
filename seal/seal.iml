@@ -117,6 +117,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/greendao-1.3.7.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: id.zelory:compressor-2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/fastjson-1.2.5.jar:unspecified@jar" level="project" />
@@ -143,6 +144,7 @@
     <orderEntry type="library" name="Gradle: com.orhanobut:logger-2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMKit/src/main/libs/Rong_IMKit.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/CallEngine_Agora.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.bumptech.glide:glide:3.7.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/org.apache.http.legacy.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/AMap_2DMap_V2.9.0_20160525.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton:butterknife-8.8.1" level="project" />
@@ -160,8 +162,8 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:2.0.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/Rong_CallLib.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: top.zibin:Luban-1.1.3" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/AMap_Channel_Location_V1.4.0_20160708.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/AMap_Search_V3.4.0_20160811.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.0.0" level="project" />
