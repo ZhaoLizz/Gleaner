@@ -16,12 +16,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
-import org.jsoup.helper.DataUtil;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +28,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadBatchListener;
-import cn.bmob.v3.listener.UploadFileListener;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.bean.BitmapBodyJson;
 import cn.rongcloud.im.bean.Thing;

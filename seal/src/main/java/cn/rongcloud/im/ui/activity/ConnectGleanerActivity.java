@@ -1,6 +1,5 @@
 package cn.rongcloud.im.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -13,13 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
-import cn.rongcloud.im.App;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.SealAppContext;
 import cn.rongcloud.im.SealConst;
@@ -35,7 +35,6 @@ import cn.rongcloud.im.server.utils.CommonUtils;
 import cn.rongcloud.im.server.utils.NToast;
 import cn.rongcloud.im.server.widget.DialogWithYesOrNoUtils;
 import cn.rongcloud.im.server.widget.LoadDialog;
-import io.rong.imageloader.core.ImageLoader;
 import io.rong.imlib.model.UserInfo;
 
 public class ConnectGleanerActivity extends BaseActivity {
@@ -96,6 +95,10 @@ public class ConnectGleanerActivity extends BaseActivity {
         mPhone = mUser.getUsername();
         Logger.d(mPhone);
 
+        Glide.with(ConnectGleanerActivity.this).load(thing.getPhotoUrl())
+                .skipMemoryCache(true) // 不使用内存缓存
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(img_publish_good);
         switch (thing.getItemType()) {
             case Thing.ITEM:
                 Logger.d(thing.getItemName() + thing.getLocation() + thing.getTime());

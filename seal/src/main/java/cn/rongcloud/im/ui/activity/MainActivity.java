@@ -496,6 +496,7 @@ public class MainActivity extends FragmentActivity implements
                 break;
             //寻物启示
             case R.id.btn_find:
+                startActivity(new Intent(this, SearchThingActivity.class));
                 break;
         }
     }

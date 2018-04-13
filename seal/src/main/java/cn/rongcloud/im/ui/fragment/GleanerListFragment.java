@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,7 @@ public class GleanerListFragment extends Fragment {
         query.findObjects(getActivity(), new FindListener<Thing>() {
             @Override
             public void onSuccess(List<Thing> list) {
+                Logger.d(list.size());
                 things.clear();
                 things.addAll(list);
                 mAdapter.notifyDataSetChanged();
@@ -94,7 +96,7 @@ public class GleanerListFragment extends Fragment {
 
             @Override
             public void onError(int i, String s) {
-
+                Logger.e(s);
             }
         });
     }

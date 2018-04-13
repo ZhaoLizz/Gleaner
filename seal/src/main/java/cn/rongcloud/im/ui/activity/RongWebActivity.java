@@ -34,9 +34,9 @@ public class RongWebActivity extends BaseActivity {
 
 
         MyWebViewClient mMyWebViewClient = new MyWebViewClient();
-        mMyWebViewClient.onPageFinished(mWebView, "http://rongcloud.cn/");
-        mMyWebViewClient.shouldOverrideUrlLoading(mWebView, "http://rongcloud.cn/");
-        mMyWebViewClient.onPageFinished(mWebView, "http://rongcloud.cn/");
+        mMyWebViewClient.onPageFinished(mWebView, "https://github.com/ZhaoLizz");
+        mMyWebViewClient.shouldOverrideUrlLoading(mWebView, "https://github.com/ZhaoLizz");
+        mMyWebViewClient.onPageFinished(mWebView, "https://github.com/ZhaoLizz");
         mWebView.setWebViewClient(mMyWebViewClient);
     }
 

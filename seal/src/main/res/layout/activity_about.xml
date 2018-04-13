@@ -24,6 +24,7 @@
         android:visibility="gone" />
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_update_log"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
         android:layout_marginTop="16dp">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/function_introduce"
             style="@style/DemoTextStyleBigBlack"
             android:layout_width="wrap_content"
@@ -92,6 +94,40 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            style="@style/DemoTextStyleBigBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="我们：" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            style="@style/DemoTextStyleBigBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="赵励志  李施霖  王天锐  鲍骞月" />
+
+    </RelativeLayout>
+
+
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.25dp"
@@ -100,6 +136,7 @@
         android:background="#dfdfdd" />
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_version"
         android:layout_width="match_parent"
         android:layout_height="47.5dp">
@@ -136,6 +173,21 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            style="@style/DemoTextStyleBigBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="秦楚霁  蒋昱葳  杨玉林  韩杞" />
+
+    </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -146,6 +198,7 @@
 
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/start_debug"
         android:layout_width="match_parent"
         android:layout_height="47.5dp">
@@ -232,5 +285,7 @@
         android:text="Powered by RongCloud"
         android:textColor="#999"
         android:textSize="14sp" />
+
+
 
 </LinearLayout>

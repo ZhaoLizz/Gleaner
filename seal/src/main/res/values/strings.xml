@@ -20,7 +20,7 @@
     <string name="set_news_reminded">新消息提醒</string>
     <string name="set_privacy">隐私</string>
     <string name="set_set">设置</string>
-    <string name="set_rongcloud">关于 SealTalk</string>
+    <string name="set_rongcloud">关于拾遗</string>
     <string name="set_logout">注销</string>
     <string name="de_save">"保存"</string>
 
@@ -46,7 +46,7 @@
     <string name="function_introduce">功能介绍</string>
     <string name="version_number">V2.1.0</string>
     <string name="dv_document">开发者文档</string>
-    <string name="rongcloud_web">官方网站</string>
+    <string name="rongcloud_web">我的网站</string>
     <string name="new_version_update">当前版本</string>
     <string name="de_notification_start">开始时间</string>
     <string name="de_notification_end">结束时间</string>
@@ -206,7 +206,7 @@
     <string name="contacts">通讯录</string>
     <string name="discover">发现</string>
     <string name="me">我</string>
-    <string name="mine_about">关于 SealTalk</string>
+    <string name="mine_about">关于拾遗</string>
     <string name="my_wallet">我的钱包</string>
     <string name="mine_service">意见反馈</string>
     <string name="mine_setting">账号设置</string>

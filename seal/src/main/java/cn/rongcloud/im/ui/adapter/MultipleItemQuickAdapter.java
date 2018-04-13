@@ -1,14 +1,11 @@
 package cn.rongcloud.im.ui.adapter;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import cn.rongcloud.im.bean.Thing;
 public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Thing, BaseViewHolder> {
     private Context mContext;
 
-    public MultipleItemQuickAdapter(List<Thing> data,Context context) {
+    public MultipleItemQuickAdapter(List<Thing> data, Context context) {
         super(data);
         mContext = context;
         addItemType(Thing.ITEM, R.layout.item_thing);

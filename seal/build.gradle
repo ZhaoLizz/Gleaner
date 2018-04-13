@@ -94,6 +94,9 @@ dependencies {
 
     implementation 'com.android.support:cardview-v7:23.2.0'
 
+    implementation 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'
