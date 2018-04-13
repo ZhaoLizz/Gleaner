@@ -92,14 +92,14 @@ public class ConnectGleanerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
+
+        btn_publish_good_publish.setText("获取联系");
+
         Intent intent = getIntent();
         thing = (Thing) intent.getSerializableExtra("thing");
         searchThing = (SearchThing) intent.getSerializableExtra("searching");
-
-
         if (thing != null) {
-
-
+            mPhone = thing.getUserphone();
             Glide.with(ConnectGleanerActivity.this).load(thing.getPhotoUrl())
                     .skipMemoryCache(true) // 不使用内存缓存
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -114,12 +114,13 @@ public class ConnectGleanerActivity extends BaseActivity {
                     updataSchoolCardUI(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
                     break;
                 case Thing.IDCARD:
-                    Logger.d(thing.getName()+thing.getSex()+ thing.getNation()+ thing.getHomeLocation()+ thing.getNumber()+thing.getLocation()+ thing.getTime());
+                    Logger.d(thing.getName() + thing.getSex() + thing.getNation() + thing.getHomeLocation() + thing.getNumber() + thing.getLocation() + thing.getTime());
                     updataIdCardUI(thing.getName(), thing.getSex(), thing.getNation(), thing.getHomeLocation(), thing.getNumber(), thing.getLocation(), thing.getTime());
                     break;
             }
         } else if (searchThing != null) {
-            Logger.d("searchThing not null" );
+            mPhone = searchThing.getUserPhone();
+            Logger.d("searchThing not null");
             updateFindItemUI(searchThing.getItemName(), searchThing.getLocation(), "", searchThing.getDescription());
         }
 
@@ -201,11 +202,6 @@ public class ConnectGleanerActivity extends BaseActivity {
 
     @OnClick(R.id.publish_good_publish_btn)
     public void onViewClicked() {
-        if (thing != null) {
-            
-        } else if (searchThing != null) {
-
-        }
         addFirend();
     }
 

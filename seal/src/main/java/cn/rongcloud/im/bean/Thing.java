@@ -18,6 +18,7 @@ public class Thing extends BmobObject implements MultiItemEntity,Serializable{
     private String time;
     private String location;
     private UserInfoBean user;
+    private String userphone;
     private String photoUrl;
 
 
@@ -32,6 +33,14 @@ public class Thing extends BmobObject implements MultiItemEntity,Serializable{
     private String homeLocation;
 
     private int itemtype; // 0:item  1:school  2:idcard
+
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
 
     public String getPhotoUrl() {
         return photoUrl;

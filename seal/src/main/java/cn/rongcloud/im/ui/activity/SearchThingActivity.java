@@ -110,6 +110,7 @@ public class SearchThingActivity extends BaseActivity {
                 searchThing.setItemName(mSearchItemName.getText().toString());
                 searchThing.setTime(time);
                 searchThing.setUserInfoBean(BmobUser.getCurrentUser(SearchThingActivity.this, UserInfoBean.class));
+                searchThing.setUserPhone(BmobUser.getCurrentUser(SearchThingActivity.this, UserInfoBean.class).getUsername());
                 searchThing.setDescription(mSearchSay.getText().toString());
                 searchThing.setLocation(mSearchLocation.getText().toString());
                 if (compressedFile != null) {

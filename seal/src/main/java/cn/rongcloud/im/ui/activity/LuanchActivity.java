@@ -88,6 +88,7 @@ public class LuanchActivity extends Activity {
     private void init() {
         Intent intent = getIntent();
         String filePath = intent.getStringExtra("photoUri");
+        btn_publish_good_publish.setText("发布");
         Logger.d(filePath);
 
 
@@ -129,6 +130,7 @@ public class LuanchActivity extends Activity {
                                     thing.setSex(sex);
                                     thing.setHomeLocation(home);
                                     thing.setUser(user);
+                                    thing.setUserphone(user.getUsername());
                                     thing.setTime(curTime);
                                     thing.setLocation(location);
                                 } else {
@@ -137,6 +139,7 @@ public class LuanchActivity extends Activity {
                                     thing = new Thing();
                                     thing.setItemtype(Thing.SCHOOLCARD);
                                     thing.setUser(user);
+                                    thing.setUserphone(user.getUsername());
                                     thing.setItemName("校园卡");
                                     thing.setName(schoolcardMessage.get("name"));
                                     thing.setNumber(schoolcardMessage.get("number"));
@@ -151,6 +154,7 @@ public class LuanchActivity extends Activity {
                         thing = new Thing();
                         thing.setItemtype(Thing.ITEM);
                         thing.setUser(user);
+                        thing.setUserphone(user.getUsername());
                         thing.setItemName(itemName);
                         thing.setLocation(location);
                         thing.setTime(curTime);

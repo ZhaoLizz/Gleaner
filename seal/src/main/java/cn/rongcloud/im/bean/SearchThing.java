@@ -16,6 +16,15 @@ public class SearchThing extends BmobObject implements Serializable{
     private String photoUrl;
     private String description;
     private UserInfoBean mUserInfoBean;
+    private String userPhone;
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
 
     public String getItemName() {
         return itemName;

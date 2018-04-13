@@ -11,15 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68776d84-f6c4-4cb7-b1ce-d59593711d68" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/seal/src/main/res/drawable-xxhdpi/btn_backfground.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/FindAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/seal/src/main/res/layout/fragment_rv_2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/ConnectGleanerActivity.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/ConnectGleanerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/SearchListAdapter.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/SearchListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/FinderListFragment.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/FinderListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/res/layout/activity_publish.xml" afterPath="$PROJECT_DIR$/seal/src/main/res/layout/activity_publish.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java" afterPath="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,10 +87,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="LuanchActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="475">
+              <caret line="90" column="47" lean-forward="true" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FinderListFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/FinderListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
+            <state relative-caret-position="747">
               <caret line="58" column="70" lean-forward="false" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
               <folding>
                 <element signature="e#2371#2535#0" expanded="true" />
@@ -109,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/FindAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="509">
-              <caret line="50" column="42" lean-forward="true" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="42" />
+              <caret line="50" column="42" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1652#1979#0" expanded="true" />
@@ -124,10 +131,12 @@
       <file leaf-file-name="ConnectGleanerActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/ConnectGleanerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="204" column="12" lean-forward="false" selection-start-line="204" selection-start-column="12" selection-end-line="204" selection-end-column="12" />
+            <state relative-caret-position="367">
+              <caret line="95" column="46" lean-forward="false" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7874#7875#0" expanded="true" />
+                <element signature="e#7901#7902#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,9 +145,13 @@
       <file leaf-file-name="Thing.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-510">
-              <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="578">
+              <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+              <folding>
+                <element signature="e#1037#1038#0" expanded="true" />
+                <element signature="e#1087#1088#0" expanded="true" />
+                <element signature="e#1129#1130#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,11 +159,24 @@
       <file leaf-file-name="SearchThing.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="11" column="67" lean-forward="false" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
+            <state relative-caret-position="571">
+              <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#524#525#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#616#617#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchThingActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="112" column="126" lean-forward="false" selection-start-line="112" selection-start-column="126" selection-end-line="112" selection-end-column="126" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -8195,7 +8221,6 @@
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/MultipleItemQuickAdapter.java" />
         <option value="$PROJECT_DIR$/seal/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/db/UserInfoBean.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/item_school_card.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/item_id_card.xml" />
@@ -8211,14 +8236,15 @@
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/AboutRongCloudActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/activity_about.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/GleanerListFragment.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/fragment_rv_2.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/activity_publish.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/SearchListAdapter.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/FinderListFragment.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/FindAdapter.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/ConnectGleanerActivity.java" />
       </list>
     </option>
@@ -8731,7 +8757,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523653564854" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523654111606" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -8779,7 +8805,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523653564855" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523654111606" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -8962,7 +8988,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523653564855" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523654111607" />
       </method>
     </configuration>
     <list size="1">
@@ -9007,7 +9033,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298731" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -9251,14 +9277,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="100" column="45" lean-forward="false" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/MultipleItemQuickAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="658">
@@ -9439,14 +9457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6630">
-          <caret line="262" column="62" lean-forward="false" selection-start-line="262" selection-start-column="62" selection-end-line="262" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/GleanerListFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1145">
@@ -9499,24 +9509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="11" column="67" lean-forward="false" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/SearchListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="571">
@@ -9527,23 +9519,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/FinderListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="58" column="70" lean-forward="false" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
-          <folding>
-            <element signature="e#2371#2535#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#3409#3410#0" expanded="true" />
-            <element signature="e#3452#3453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/adapter/FindAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="509">
-          <caret line="50" column="42" lean-forward="true" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="42" />
+          <caret line="50" column="42" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1652#1979#0" expanded="true" />
@@ -9554,12 +9533,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/ConnectGleanerActivity.java">
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/Thing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="204" column="12" lean-forward="false" selection-start-line="204" selection-start-column="12" selection-end-line="204" selection-end-column="12" />
+        <state relative-caret-position="578">
+          <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+          <folding>
+            <element signature="e#1037#1038#0" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
+            <element signature="e#1129#1130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/bean/SearchThing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#616#617#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/SearchThingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="112" column="126" lean-forward="false" selection-start-line="112" selection-start-column="126" selection-end-line="112" selection-end-column="126" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/fragment/FinderListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="747">
+          <caret line="58" column="70" lean-forward="false" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
+          <folding>
+            <element signature="e#2371#2535#0" expanded="true" />
+            <element signature="e#2534#2535#0" expanded="true" />
+            <element signature="e#3409#3410#0" expanded="true" />
+            <element signature="e#3452#3453#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/LuanchActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="90" column="47" lean-forward="true" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/cn/rongcloud/im/ui/activity/ConnectGleanerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="95" column="46" lean-forward="false" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7874#7875#0" expanded="true" />
+            <element signature="e#7901#7902#0" expanded="true" />
           </folding>
         </state>
       </provider>
