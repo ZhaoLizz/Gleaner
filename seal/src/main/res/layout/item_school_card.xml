@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?android:selectableItemBackground"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="6dp"
-    app:cardMaxElevation="8dp"
-    app:cardUseCompatPadding="true">
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:id="@+id/item_school_card"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:foreground="?android:selectableItemBackground"
+                                    app:cardCornerRadius="6dp"
+                                    app:cardElevation="6dp"
+                                    app:cardMaxElevation="8dp"
+                                    app:cardUseCompatPadding="true">
 
 
     <LinearLayout
@@ -22,8 +23,7 @@
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            tools:src="@drawable/barack" />
+            android:scaleType="fitXY"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -40,14 +40,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="姓名:" />
+                    android:text="姓名:"/>
 
                 <TextView
                     android:id="@+id/school_name_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    tools:text="鲍骞月" />
+                    tools:text="鲍骞月"/>
 
             </LinearLayout>
 
@@ -61,14 +61,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="学号:" />
+                    android:text="学号:"/>
 
                 <TextView
                     android:id="@+id/school_id_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    tools:text="1607104130" />
+                    tools:text="1607104130"/>
 
             </LinearLayout>
 
@@ -81,14 +81,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="学院:" />
+                    android:text="学院:"/>
 
                 <TextView
                     android:id="@+id/school_content_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    tools:text="大数据学院" />
+                    tools:text="大数据学院"/>
 
             </LinearLayout>
 
@@ -101,14 +101,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发布时间:" />
+                    android:text="发布时间:"/>
 
                 <TextView
                     android:id="@+id/school_card_time_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    tools:text="2018.4.13" />
+                    tools:text="2018.4.13"/>
 
             </LinearLayout>
 
@@ -121,14 +121,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="丢失地点:" />
+                    android:text="丢失地点:"/>
 
                 <TextView
                     android:id="@+id/school_card_location_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    tools:text="11-501" />
+                    tools:text="11-501"/>
 
             </LinearLayout>
 

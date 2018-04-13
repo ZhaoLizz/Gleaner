@@ -21,7 +21,6 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-
         <RelativeLayout
             android:id="@+id/seal_chat"
             android:layout_width="0dp"

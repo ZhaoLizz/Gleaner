@@ -112,7 +112,7 @@ public class LuanchActivity extends Activity {
                 public void onRecognize(String jsonResult) {
                     String itemName = RecognizeUtil.parseItemJson(jsonResult);
                     Logger.d(itemName);
-                    if (itemName.equals("校园卡")) {
+                    if (itemName.equals("校园卡") || itemName.equals("身份证")) {
                         RecognizeUtil.readTextImgByBaidu(compressedFile, new RecognizeUtil.OnRecognizeListener() {
                             @Override
                             public void onRecognize(String jsonResult) {
@@ -134,6 +134,8 @@ public class LuanchActivity extends Activity {
                                     thing.setSex(sex);
                                     thing.setHomeLocation(home);
                                     thing.setUser(user);
+                                    thing.setTime(curTime);
+                                    thing.setLocation(location);
                                 } else {
                                     //school card
                                     updataSchoolCardUI(schoolcardMessage.get("name"), schoolcardMessage.get("number"), schoolcardMessage.get("college"), curTime, location);
@@ -184,53 +186,36 @@ public class LuanchActivity extends Activity {
     public void onViewClicked() {
         mPublishProgress.setVisibility(View.VISIBLE);
         Toast.makeText(this, "正在上传至服务器...", Toast.LENGTH_SHORT).show();
-        if (thing.getItemType() == Thing.ITEM || thing.getItemType() == Thing.SCHOOLCARD) {
-            BmobFile.uploadBatch(LuanchActivity.this, new String[]{compressedFile.getPath()}, new UploadBatchListener() {
-                @Override
-                public void onSuccess(List<BmobFile> list, List<String> urls) {
-                    thing.setPhotoUrl(urls.get(0));
-                    thing.save(LuanchActivity.this, new SaveListener() {
-                        @Override
-                        public void onSuccess() {
-                            Logger.d("succeed");
-                            mPublishProgress.setVisibility(View.GONE);
-                            Toast.makeText(LuanchActivity.this, "成功上传数据!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+        BmobFile.uploadBatch(LuanchActivity.this, new String[]{compressedFile.getPath()}, new UploadBatchListener() {
+            @Override
+            public void onSuccess(List<BmobFile> list, List<String> urls) {
+                thing.setPhotoUrl(urls.get(0));
+                thing.save(LuanchActivity.this, new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        Logger.d("succeed");
+                        mPublishProgress.setVisibility(View.GONE);
+                        Toast.makeText(LuanchActivity.this, "成功上传数据!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
 
-                        @Override
-                        public void onFailure(int i, String s) {
-                            Logger.d(s);
-                        }
-                    });
-                }
+                    @Override
+                    public void onFailure(int i, String s) {
+                        Logger.d(s);
+                    }
+                });
+            }
 
-                @Override
-                public void onProgress(int i, int i1, int i2, int i3) {
+            @Override
+            public void onProgress(int i, int i1, int i2, int i3) {
 
-                }
+            }
 
-                @Override
-                public void onError(int i, String s) {
+            @Override
+            public void onError(int i, String s) {
 
-                }
-            });
-        } else {
-            thing.save(LuanchActivity.this, new SaveListener() {
-                @Override
-                public void onSuccess() {
-                    Logger.d("succeed");
-                    mPublishProgress.setVisibility(View.GONE);
-                    Toast.makeText(LuanchActivity.this, "成功上传数据!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-
-                @Override
-                public void onFailure(int i, String s) {
-                    Logger.e(s);
-                }
-            });
-        }
+            }
+        });
     }
 
     private void updataItemUI(final String name, final String location, final String time) {

@@ -9,7 +9,7 @@ import cn.bmob.v3.BmobUser;
  * 这种有些不伦不类的折中修改主要是为了尽量少修改现有代码
  */
 public class UserInfoBean extends BmobUser{
-    private String id;  //userid is phoneNumber
+    private String id;
     private String name;
     private String portraitUri;
 

@@ -581,6 +581,10 @@
             android:name=".ui.activity.ConnectGleanerActivity"
             android:label="@string/title_activity_connect_gleaner">
         </activity>
+        <activity
+            android:name=".ui.activity.SearchThingActivity"
+            android:label="@string/title_activity_search_thing">
+        </activity>
     </application>
 
 </manifest>

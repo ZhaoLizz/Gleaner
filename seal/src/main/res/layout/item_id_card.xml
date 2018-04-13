@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?android:selectableItemBackground"
-    android:orientation="vertical"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="6dp"
-    app:cardMaxElevation="8dp"
-    app:cardUseCompatPadding="true">
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:id="@+id/item_id_card"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:foreground="?android:selectableItemBackground"
+                                    android:orientation="vertical"
+                                    app:cardCornerRadius="6dp"
+                                    app:cardElevation="6dp"
+                                    app:cardMaxElevation="8dp"
+                                    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +42,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="姓名:" />
+                    android:text="姓名:"/>
 
                 <TextView
                     android:id="@+id/id_card_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    tools:text="鲍骞月" />
+                    tools:text="鲍骞月"/>
 
             </LinearLayout>
 
@@ -62,14 +63,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="性别:" />
+                    android:text="性别:"/>
 
                 <TextView
                     android:id="@+id/id_card_gender_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    tools:text="男" />
+                    tools:text="男"/>
 
             </LinearLayout>
 
@@ -83,14 +84,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="民族:" />
+                    android:text="民族:"/>
 
                 <TextView
                     android:id="@+id/id_card_ethnic_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    tools:text="汉族" />
+                    tools:text="汉族"/>
             </LinearLayout>
 
             <LinearLayout
@@ -103,14 +104,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="身份证号:" />
+                    android:text="身份证号:"/>
 
                 <TextView
                     android:id="@+id/id_card_id_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    tools:text="14062219980816xxxx" />
+                    tools:text="14062219980816xxxx"/>
             </LinearLayout>
 
 

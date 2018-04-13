@@ -1,5 +1,6 @@
 package cn.rongcloud.im.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.bean.Thing;
+import cn.rongcloud.im.ui.activity.ConnectGleanerActivity;
 import cn.rongcloud.im.ui.adapter.MultipleItemQuickAdapter;
 
 import static com.chad.library.adapter.base.BaseQuickAdapter.SCALEIN;
@@ -42,6 +46,15 @@ public class GleanerListFragment extends Fragment {
         things = new ArrayList<>();
         mAdapter = new MultipleItemQuickAdapter(things, getContext());
         mAdapter.openLoadAnimation(SCALEIN);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getContext(), ConnectGleanerActivity.class);
+                intent.putExtra("thing", things.get(position));
+                startActivity(intent);
+            }
+        });
+
         mFragmentRv.setLayoutManager(new LinearLayoutManager(getContext()));
         mFragmentRv.setAdapter(mAdapter);
         mRefershLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

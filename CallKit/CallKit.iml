@@ -50,13 +50,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
@@ -64,6 +57,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -109,18 +109,18 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/Rong_CallLib.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:26.0.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-fragment-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMKit/src/main/libs/Rong_IMKit.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/CallEngine_Agora.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/IMLib/libs/Rong_IMLib.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/CallLib/libs/agora-rtc-sdk.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-compat-26.0.0" level="project" />
+    <orderEntry type="library" name="com.android.support:support-media-compat-26.0.0" level="project" />
+    <orderEntry type="library" name="com.android.support:support-compat-26.0.0" level="project" />
+    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\IMLib\libs\Rong_IMLib.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\CallLib\libs\CallEngine_Agora.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\IMKit\src\main\libs\Rong_IMKit.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:support-core-utils-26.0.0" level="project" />
+    <orderEntry type="library" name="com.android.support:support-core-ui-26.0.0" level="project" />
+    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\CallLib\libs\agora-rtc-sdk.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:support-annotations:26.0.0@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:support-fragment-26.0.0" level="project" />
+    <orderEntry type="library" name="com.android.support:support-v4-26.0.0" level="project" />
+    <orderEntry type="library" name="__local_aars__:C.\Users\qinba\Desktop\sealtalk-android-bug\CallLib\libs\Rong_CallLib.jar:unspecified@jar" level="project" />
     <orderEntry type="module" module-name="CallLib" />
     <orderEntry type="module" module-name="IMLib" />
     <orderEntry type="module" module-name="IMKit" />

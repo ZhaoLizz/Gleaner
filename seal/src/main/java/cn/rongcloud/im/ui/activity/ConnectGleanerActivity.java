@@ -2,6 +2,7 @@ package cn.rongcloud.im.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +25,7 @@ import cn.rongcloud.im.SealAppContext;
 import cn.rongcloud.im.SealConst;
 import cn.rongcloud.im.SealUserInfoManager;
 import cn.rongcloud.im.bean.Thing;
+import cn.rongcloud.im.db.Friend;
 import cn.rongcloud.im.db.UserInfoBean;
 import cn.rongcloud.im.server.network.async.AsyncTaskManager;
 import cn.rongcloud.im.server.network.http.HttpException;
@@ -78,42 +82,44 @@ public class ConnectGleanerActivity extends BaseActivity {
     private String addFriendMessage = "我是失主,感谢您发布的招领启事";
     private String mFriendId = "";
     private String mPhone = "";
+    private UserInfoBean mUser;
+    private Friend mFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
-        btn_publish_good_publish.setText("联系用户");
         Intent intent = getIntent();
         Thing thing = (Thing) intent.getSerializableExtra("thing");
-        mPhone = BmobUser.getCurrentUser(this, UserInfoBean.class).getUserId();
+        mUser = BmobUser.getCurrentUser(this, UserInfoBean.class);
+        mPhone = mUser.getUsername();
+        Logger.d(mPhone);
 
         switch (thing.getItemType()) {
             case Thing.ITEM:
-                updataItemUI(thing.getName(), thing.getLocation(), thing.getTime());
+                Logger.d(thing.getItemName() + thing.getLocation() + thing.getTime());
+                updataItemUI(thing.getItemName(), thing.getLocation(), thing.getTime());
                 break;
             case Thing.SCHOOLCARD:
+                Logger.d(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
                 updataSchoolCardUI(thing.getName(), thing.getNumber(), thing.getCollege(), thing.getTime(), thing.getLocation());
                 break;
             case Thing.IDCARD:
+                Logger.d(thing.getName()+thing.getSex()+ thing.getNation()+ thing.getHomeLocation()+ thing.getNumber()+thing.getLocation()+ thing.getTime());
                 updataIdCardUI(thing.getName(), thing.getSex(), thing.getNation(), thing.getHomeLocation(), thing.getNumber(), thing.getLocation(), thing.getTime());
                 break;
         }
     }
 
     private void updataItemUI(final String name, final String location, final String time) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mPublishProgress.setVisibility(View.GONE);
-                mPublishLocationLayout.setVisibility(View.GONE);
-                mPublishTimeLayout.setVisibility(View.GONE);
-                tv_1st_r.setText(name);
-                tv_3st_r.setText(location);
-                tv_2st_r.setText(time);
-            }
-        });
+        mPublishProgress.setVisibility(View.GONE);
+        mPublishLocationLayout.setVisibility(View.GONE);
+        mPublishTimeLayout.setVisibility(View.GONE);
+        tv_1st_l.setText("物品名称");
+        tv_1st_r.setText(name);
+        tv_3st_r.setText(location);
+        tv_2st_r.setText(time);
     }
 
     private void updataSchoolCardUI(final String name, final String number, final String college, final String time, final String location) {
@@ -194,7 +200,7 @@ public class ConnectGleanerActivity extends BaseActivity {
                     final GetUserInfoByPhoneResponse userInfoByPhoneResponse = (GetUserInfoByPhoneResponse) result;
                     if (userInfoByPhoneResponse.getCode() == 200) {
                         LoadDialog.dismiss(mContext);
-                        NToast.shortToast(mContext, "success");
+                        NToast.shortToast(mContext, "连接成功！");
                         mFriendId = userInfoByPhoneResponse.getResult().getId();
                         String portraitUri = null;
                         if (userInfoByPhoneResponse.getResult() != null) {
@@ -203,37 +209,46 @@ public class ConnectGleanerActivity extends BaseActivity {
                                     userInfoByPhoneResponseResult.getNickname(),
                                     Uri.parse(userInfoByPhoneResponseResult.getPortraitUri()));
                             portraitUri = SealUserInfoManager.getInstance().getPortraitUri(userInfo);
-                            DialogWithYesOrNoUtils.getInstance().showEditDialog(mContext, getString(R.string.add_text), getString(R.string.add_friend), new DialogWithYesOrNoUtils.DialogCallBack() {
-                                @Override
-                                public void executeEvent() {
-
-                                }
-
-                                @Override
-                                public void updatePassword(String oldPassword, String newPassword) {
-
-                                }
-
-                                @Override
-                                public void executeEditEvent(String editText) {
-                                    if (!CommonUtils.isNetworkConnected(mContext)) {
-                                        NToast.shortToast(mContext, R.string.network_not_available);
-                                        return;
-                                    }
-                                    addFriendMessage = editText;
-                                    if (TextUtils.isEmpty(editText)) {
-                                        addFriendMessage = "我是" + getSharedPreferences("config", MODE_PRIVATE).getString(SealConst.SEALTALK_LOGIN_NAME, "");
-                                    }
-                                    if (!TextUtils.isEmpty(mFriendId)) {
-                                        LoadDialog.show(mContext);
-                                        request(ADD_FRIEND);
-                                    } else {
-                                        NToast.shortToast(mContext, "id is null");
-                                    }
-                                }
-                            });
                         }
 
+                        if (isFriendOrSelf(mFriendId)) {
+                            Logger.d("isSelf");
+                            Intent intent = new Intent(ConnectGleanerActivity.this, UserDetailActivity.class);
+                            intent.putExtra("friend", mFriend);
+                            intent.putExtra("type", CLICK_CONVERSATION_USER_PORTRAIT);
+                            startActivity(intent);
+                            SealAppContext.getInstance().pushActivity(ConnectGleanerActivity.this);
+                            return;
+                        }
+                        DialogWithYesOrNoUtils.getInstance().showEditDialog(mContext, getString(R.string.add_text), getString(R.string.add_friend), new DialogWithYesOrNoUtils.DialogCallBack() {
+                            @Override
+                            public void executeEvent() {
+
+                            }
+
+                            @Override
+                            public void updatePassword(String oldPassword, String newPassword) {
+
+                            }
+
+                            @Override
+                            public void executeEditEvent(String editText) {
+                                if (!CommonUtils.isNetworkConnected(mContext)) {
+                                    NToast.shortToast(mContext, R.string.network_not_available);
+                                    return;
+                                }
+                                addFriendMessage = editText;
+                                if (TextUtils.isEmpty(editText)) {
+                                    addFriendMessage = "我是" + getSharedPreferences("config", MODE_PRIVATE).getString(SealConst.SEALTALK_LOGIN_NAME, "");
+                                }
+                                if (!TextUtils.isEmpty(mFriendId)) {
+                                    LoadDialog.show(mContext);
+                                    request(ADD_FRIEND);
+                                } else {
+                                    NToast.shortToast(mContext, "id is null");
+                                }
+                            }
+                        });
                     }
                     break;
                 case ADD_FRIEND:
@@ -248,6 +263,7 @@ public class ConnectGleanerActivity extends BaseActivity {
                     break;
             }
         }
+
     }
 
     @Override
@@ -266,5 +282,25 @@ public class ConnectGleanerActivity extends BaseActivity {
                 LoadDialog.dismiss(mContext);
                 break;
         }
+    }
+
+    private boolean isFriendOrSelf(String id) {
+        String inputPhoneNumber = mPhone;
+        SharedPreferences sp = getSharedPreferences("config", MODE_PRIVATE);
+        String selfPhoneNumber = sp.getString(SealConst.SEALTALK_LOGING_PHONE, "");
+        if (inputPhoneNumber != null) {
+            if (inputPhoneNumber.equals(selfPhoneNumber)) {
+                mFriend = new Friend(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""),
+                        sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""),
+                        Uri.parse(sp.getString(SealConst.SEALTALK_LOGING_PORTRAIT, "")));
+                return true;
+            } else {
+                mFriend = SealUserInfoManager.getInstance().getFriendByID(id);
+                if (mFriend != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
