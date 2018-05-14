@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="赵励志  李施霖  王天锐  鲍骞月" />
+            android:text="赵励志  蒋昱葳  杨玉林" />
 
     </RelativeLayout>
 
@@ -173,20 +173,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:layout_marginTop="16dp">
 
-        <TextView
-            style="@style/DemoTextStyleBigBlack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="秦楚霁  蒋昱葳  杨玉林  韩杞" />
-
-    </RelativeLayout>
 
 
     <View

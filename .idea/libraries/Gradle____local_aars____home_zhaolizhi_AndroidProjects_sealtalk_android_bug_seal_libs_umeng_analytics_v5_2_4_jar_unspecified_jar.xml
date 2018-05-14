@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: __local_aars__:/home/zhaolizhi/AndroidProjects/sealtalk-android-bug/seal/libs/umeng-analytics-v5.2.4.jar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/seal/libs/umeng-analytics-v5.2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -542,16 +542,16 @@ public class MainActivity extends FragmentActivity implements
                 }
                 if (Build.VERSION.SDK_INT >= 23) {
                     int checkPermission = checkSelfPermission(Manifest.permission.CAMERA);
-                    if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+                    if (checkPermission != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED  ||checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                             requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSIONS);
                         } else {
                             new AlertDialog.Builder(mContext)
-                                    .setMessage("您需要在设置里打开相机权限。")
+                                    .setMessage("您需要在设置里打开相机权限和读写内存权限。")
                                     .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSIONS);
+                                            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
                                         }
                                     })
                                     .setNegativeButton("取消", null)
