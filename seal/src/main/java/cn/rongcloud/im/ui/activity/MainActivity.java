@@ -48,11 +48,13 @@ import cn.rongcloud.im.ui.fragment.MineFragment;
 import cn.rongcloud.im.ui.fragment.ThingsListFragment;
 import cn.rongcloud.im.ui.widget.DragPointView;
 import cn.rongcloud.im.ui.widget.MorePopWindow;
+import cn.rongcloud.im.utils.MapUtils;
 import io.rong.common.RLog;
 import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationListFragment;
 import io.rong.imkit.manager.IUnReadMessageObserver;
+import io.rong.imkit.plugin.location.AMapLocationActivity;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.message.ContactNotificationMessage;
@@ -496,7 +498,8 @@ public class MainActivity extends FragmentActivity implements
                 break;
             //寻物启示
             case R.id.btn_find:
-                startActivity(new Intent(this, SearchThingActivity.class));
+                new MapUtils(this);
+//                startActivity(new Intent(this, SearchThingActivity.class));
                 break;
         }
     }

@@ -40,6 +40,7 @@ import io.rong.imageloader.core.DisplayImageOptions;
 import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.plugin.location.AMapLocationActivity;
 import io.rong.imkit.widget.provider.RealTimeLocationMessageProvider;
 import io.rong.imlib.ipc.RongExceptionHandler;
 import io.rong.imlib.model.UserInfo;
@@ -113,6 +114,7 @@ public class App extends MultiDexApplication {
                 RongIM.registerMessageTemplate(new RealTimeLocationMessageProvider());
                 RongIM.registerMessageType(TestMessage.class);
                 RongIM.registerMessageTemplate(new TestMessageProvider());
+
 
 
             } catch (Exception e) {

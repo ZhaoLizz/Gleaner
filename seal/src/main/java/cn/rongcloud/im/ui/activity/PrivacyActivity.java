@@ -24,6 +24,7 @@ public class PrivacyActivity extends BaseActivity {
                 startActivity(new Intent(PrivacyActivity.this, BlackListActivity.class));
             }
         });
+
     }
 
 
