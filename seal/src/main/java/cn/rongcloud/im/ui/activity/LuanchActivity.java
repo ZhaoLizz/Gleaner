@@ -86,6 +86,9 @@ public class LuanchActivity extends Activity {
     }
 
     private void init() {
+
+
+
         Intent intent = getIntent();
         String filePath = intent.getStringExtra("photoUri");
         btn_publish_good_publish.setText("发布");

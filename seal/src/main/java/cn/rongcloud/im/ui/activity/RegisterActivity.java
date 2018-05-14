@@ -230,7 +230,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     switch (rres.getCode()) {
                         case 200:
                             LoadDialog.dismiss(mContext);
-
                             //TODO:Bmob注册
                             UserInfoBean userInfoBean = new UserInfoBean();
                             userInfoBean.setName(mNickName);
