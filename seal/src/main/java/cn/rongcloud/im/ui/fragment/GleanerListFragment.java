@@ -87,7 +87,7 @@ public class GleanerListFragment extends Fragment {
         query.findObjects(getActivity(), new FindListener<Thing>() {
             @Override
             public void onSuccess(List<Thing> list) {
-                Logger.d(list.size());
+//                Logger.d(list.size());
                 things.clear();
                 things.addAll(list);
                 mAdapter.notifyDataSetChanged();

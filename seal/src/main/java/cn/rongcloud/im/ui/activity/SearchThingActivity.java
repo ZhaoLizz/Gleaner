@@ -44,6 +44,8 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadBatchListener;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.bean.SearchThing;
+import cn.rongcloud.im.constant.Constants;
+import cn.rongcloud.im.constant.LocationConstants;
 import cn.rongcloud.im.db.UserInfoBean;
 import cn.rongcloud.im.server.utils.photo.PhotoUtils;
 import cn.rongcloud.im.server.widget.BottomMenuDialog;
@@ -74,12 +76,14 @@ public class SearchThingActivity extends BaseActivity {
     private String time;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_thing);
         ButterKnife.bind(this);
 
+        mSearchLocation.setText(LocationConstants.LOCATION);
         initPhotoUtils();
     }
 

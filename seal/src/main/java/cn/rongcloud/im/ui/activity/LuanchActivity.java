@@ -31,6 +31,7 @@ import cn.bmob.v3.listener.UploadBatchListener;
 import cn.rongcloud.im.R;
 import cn.rongcloud.im.bean.BitmapBodyJson;
 import cn.rongcloud.im.bean.Thing;
+import cn.rongcloud.im.constant.LocationConstants;
 import cn.rongcloud.im.db.UserInfoBean;
 import cn.rongcloud.im.utils.DateUtils;
 import cn.rongcloud.im.utils.RecognizeUtil;
@@ -73,9 +74,8 @@ public class LuanchActivity extends Activity {
     private File photoFile;
     private File compressedFile;
     private UserInfoBean user;
-    private String location = "山西省太原市尖草坪区上兰村中北大学主楼";
+    private String location = LocationConstants.LOCATION;
     private Thing thing;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

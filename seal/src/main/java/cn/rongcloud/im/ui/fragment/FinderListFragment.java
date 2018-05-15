@@ -90,7 +90,7 @@ public class FinderListFragment extends Fragment {
         query.findObjects(getActivity(), new FindListener<SearchThing>() {
             @Override
             public void onSuccess(List<SearchThing> list) {
-                Logger.d(list.size());
+//                Logger.d(list.size());
                 mThingArrayList.clear();
                 mThingArrayList.addAll(list);
 //                mAdapter.notifyDataSetChanged();

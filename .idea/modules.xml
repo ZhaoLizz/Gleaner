@@ -4,13 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CallKit/CallKit.iml" filepath="$PROJECT_DIR$/CallKit/CallKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/CallLib/CallLib.iml" filepath="$PROJECT_DIR$/CallLib/CallLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gleaner.iml" filepath="$PROJECT_DIR$/Gleaner.iml" />
       <module fileurl="file://$PROJECT_DIR$/IMKit/IMKit.iml" filepath="$PROJECT_DIR$/IMKit/IMKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/IMLib/IMLib.iml" filepath="$PROJECT_DIR$/IMLib/IMLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedPacket/RedPacket.iml" filepath="$PROJECT_DIR$/RedPacket/RedPacket.iml" />
       <module fileurl="file://$PROJECT_DIR$/contactcard/contactcard.iml" filepath="$PROJECT_DIR$/contactcard/contactcard.iml" />
       <module fileurl="file://$PROJECT_DIR$/recognizer/recognizer.iml" filepath="$PROJECT_DIR$/recognizer/recognizer.iml" />
       <module fileurl="file://$PROJECT_DIR$/seal/seal.iml" filepath="$PROJECT_DIR$/seal/seal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sealtalk-android-bug.iml" filepath="$PROJECT_DIR$/sealtalk-android-bug.iml" />
       <module fileurl="file://$PROJECT_DIR$/sticker/sticker.iml" filepath="$PROJECT_DIR$/sticker/sticker.iml" />
     </modules>
   </component>

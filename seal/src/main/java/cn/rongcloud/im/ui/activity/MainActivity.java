@@ -26,7 +26,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.netlocation.AMapNetworkLocationClient;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -35,6 +41,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.rongcloud.im.R;
+import cn.rongcloud.im.constant.LocationConstants;
 import cn.rongcloud.im.server.HomeWatcherReceiver;
 import cn.rongcloud.im.server.broadcast.BroadcastManager;
 import cn.rongcloud.im.server.utils.NToast;
@@ -48,7 +55,7 @@ import cn.rongcloud.im.ui.fragment.MineFragment;
 import cn.rongcloud.im.ui.fragment.ThingsListFragment;
 import cn.rongcloud.im.ui.widget.DragPointView;
 import cn.rongcloud.im.ui.widget.MorePopWindow;
-import cn.rongcloud.im.utils.MapUtils;
+//import cn.rongcloud.im.utils.MapUtils;
 import io.rong.common.RLog;
 import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
@@ -60,11 +67,13 @@ import io.rong.imlib.model.Conversation;
 import io.rong.message.ContactNotificationMessage;
 //import io.rong.toolkit.TestActivity;
 
+
 @SuppressWarnings("deprecation")
 public class MainActivity extends FragmentActivity implements
         ViewPager.OnPageChangeListener,
         View.OnClickListener,
         DragPointView.OnDragListencer,
+        AMapLocationListener ,
         IUnReadMessageObserver {
 
     public static ViewPager mViewPager;
@@ -84,6 +93,18 @@ public class MainActivity extends FragmentActivity implements
     private Context mContext;
     private Conversation.ConversationType[] mConversationsTypes = null;
 
+    /**
+     * 定位
+     */
+    private AMapLocationClient mAMapLocationClient;//定位控制
+    private AMapLocationClientOption mAMapLocationClientOption;//设置定位
+    private String province = "1";//省份
+    private String city= "1";//城市
+    private String district="1";//区
+    private String street = "1" ;//街道
+    private String streetNum = "1";//街道号
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +118,7 @@ public class MainActivity extends FragmentActivity implements
         initMainViewPager();
         initPhotoUtils();
         registerHomeKeyReceiver(this);
+        initLocation();
     }
 
     private void initViews() {
@@ -498,8 +520,7 @@ public class MainActivity extends FragmentActivity implements
                 break;
             //寻物启示
             case R.id.btn_find:
-                new MapUtils(this);
-//                startActivity(new Intent(this, SearchThingActivity.class));
+                startActivity(new Intent(this, SearchThingActivity.class));
                 break;
         }
     }
@@ -586,6 +607,35 @@ public class MainActivity extends FragmentActivity implements
             case PhotoUtils.INTENT_SELECT:
                 mPhotoUtils.onActivityResult(MainActivity.this, requestCode, resultCode, data);
                 break;
+        }
+    }
+
+    public void initLocation(){
+        mAMapLocationClient = new AMapLocationClient( getApplicationContext() );
+        mAMapLocationClient.setLocationListener(this);
+        mAMapLocationClientOption = new AMapLocationClientOption();
+        mAMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mAMapLocationClientOption.setInterval(3000);
+        mAMapLocationClient.startLocation();
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if (aMapLocation != null){
+            if (aMapLocation.getErrorCode() == 0 ){
+                aMapLocation.getAccuracy();
+                aMapLocation.getAddress();
+                province = aMapLocation.getProvince();
+                city = aMapLocation.getCity();
+                district = aMapLocation.getDistrict();
+                street = aMapLocation.getStreet();
+                streetNum = aMapLocation.getStreetNum();
+                LocationConstants.LOCATION = province+city+district+street+streetNum ;
+//                Toast.makeText(this , LocationConstants.LOCATION , Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this,"定位失败",Toast.LENGTH_SHORT);
         }
     }
 }
