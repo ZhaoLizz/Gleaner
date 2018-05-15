@@ -14,9 +14,12 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -103,6 +106,9 @@ public class MainActivity extends FragmentActivity implements
     private String district="1";//区
     private String street = "1" ;//街道
     private String streetNum = "1";//街道号
+    private String AOI = "1" ;//AOI信息
+    private String building = "1";//建筑物
+    private String POI = "1";//POI信息
 
 
     @Override
@@ -119,6 +125,7 @@ public class MainActivity extends FragmentActivity implements
         initPhotoUtils();
         registerHomeKeyReceiver(this);
         initLocation();
+        request();
     }
 
     private void initViews() {
@@ -566,9 +573,9 @@ public class MainActivity extends FragmentActivity implements
                 }
                 if (Build.VERSION.SDK_INT >= 23) {
                     int checkPermission = checkSelfPermission(Manifest.permission.CAMERA);
-                    if (checkPermission != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED  ||checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if (checkPermission != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED  ||checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED||checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                         if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSIONS);
+                            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE_ASK_PERMISSIONS);
                         } else {
                             new AlertDialog.Builder(mContext)
                                     .setMessage("您需要在设置里打开相机权限和读写内存权限。")
@@ -630,12 +637,59 @@ public class MainActivity extends FragmentActivity implements
                 district = aMapLocation.getDistrict();
                 street = aMapLocation.getStreet();
                 streetNum = aMapLocation.getStreetNum();
-                LocationConstants.LOCATION = province+city+district+street+streetNum ;
-//                Toast.makeText(this , LocationConstants.LOCATION , Toast.LENGTH_SHORT).show();
+                AOI = aMapLocation.getAoiName();
+                building = aMapLocation.getBuildingId();
+                POI = aMapLocation.getPoiName();
+                LocationConstants.LOCATION = province+city+district+street+streetNum+"/"+AOI+"/"+building + "/" + POI;
+                Toast.makeText(this , LocationConstants.LOCATION , Toast.LENGTH_SHORT).show();
+                Logger.d("位置",LocationConstants.LOCATION);
             }
         }
         else {
             Toast.makeText(this,"定位失败",Toast.LENGTH_SHORT);
+        }
+    }
+
+    /**
+     * 权限的动态申请
+     */
+    public void request () {
+        List<String> permissionList = new ArrayList<>() ;
+        if ( ContextCompat.checkSelfPermission( MainActivity.this , Manifest.permission.READ_PHONE_STATE ) != PackageManager.PERMISSION_GRANTED ) {
+            permissionList.add( Manifest.permission.READ_PHONE_STATE ) ;
+        }
+        if ( ContextCompat.checkSelfPermission( MainActivity.this , Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+            permissionList.add( Manifest.permission.ACCESS_FINE_LOCATION ) ;
+        }
+        if ( ContextCompat.checkSelfPermission( MainActivity.this , Manifest.permission.WRITE_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED ) {
+            permissionList.add( Manifest.permission.WRITE_EXTERNAL_STORAGE ) ;
+        }
+        if ( ContextCompat.checkSelfPermission( MainActivity.this , Manifest.permission.ACCESS_WIFI_STATE ) != PackageManager.PERMISSION_GRANTED ) {
+            permissionList.add( Manifest.permission.ACCESS_WIFI_STATE );
+        }
+        if (ContextCompat.checkSelfPermission( MainActivity.this , Manifest.permission.CAMERA ) != PackageManager.PERMISSION_GRANTED ){
+            permissionList.add( Manifest.permission.CAMERA );
+        }
+        if ( !permissionList.isEmpty() ) {
+            String [] permissions = permissionList.toArray( new String[permissionList.size() ] ) ;
+            ActivityCompat.requestPermissions( MainActivity.this , permissions , 1 ) ;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch ( requestCode ) {
+            case 1 :
+                if ( grantResults.length > 0 ) {
+                    for ( int result : grantResults ) {
+                        if ( result != PackageManager.PERMISSION_GRANTED ) {
+                            Toast.makeText(MainActivity.this , "必须要有权限" ,Toast.LENGTH_SHORT ).show();
+                            finish();
+                            return;
+                        }
+                    }
+                }
         }
     }
 }

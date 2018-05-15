@@ -114,9 +114,6 @@ public class App extends MultiDexApplication {
                 RongIM.registerMessageTemplate(new RealTimeLocationMessageProvider());
                 RongIM.registerMessageType(TestMessage.class);
                 RongIM.registerMessageTemplate(new TestMessageProvider());
-
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -210,5 +207,6 @@ public class App extends MultiDexApplication {
         }
         return null;
     }
+
 
 }
